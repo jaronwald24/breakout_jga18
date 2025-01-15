@@ -83,6 +83,13 @@ public class Main extends Application {
         }
     }
 
+    private void handlePaddleIntersection() {
+        Shape intersection = Shape.intersect(startPaddle.getPaddle(), startBall.getBall());
+        if (!intersection.getBoundsInLocal().isEmpty()) {
+            startBall.changeYDirection();
+        }
+    }
+
 
 
     // the following code has been adapted from the bounce lab
@@ -90,6 +97,7 @@ public class Main extends Application {
     private void step (double elapsedTime) {
         // update "actors" attributes a little bit at a time and at a "constant" rate (no matter how many frames per second)
         startBall.moveBall(elapsedTime);
+        handlePaddleIntersection();
     }
 
 
