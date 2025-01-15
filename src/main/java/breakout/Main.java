@@ -5,9 +5,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -37,30 +34,26 @@ public class Main extends Application {
     public static final int BALL_SIZE = 20;
     public static final int BALL_SPEED = 100;
 
-    private Ball ball;
+    private Ball startBall;
 
+    // ball class embodies everything needed
     public class Ball {
         private int size;
         private int speed;
-        private int screen_width;
-        private int screen_height;
         private Circle myBall;
         private int xDirection;
         private int yDirection;
 
-        public Ball(int size, int speed, int screen_width, int screen_height,
-            int xDirection, int yDirection) {
+        public Ball(int size, int speed, int xDirection, int yDirection) {
             this.size = size;
             this.speed = speed;
-            this.screen_width = screen_width;
-            this.screen_height = screen_height;
             this.xDirection = xDirection;
             this.yDirection = yDirection;
 
             this.myBall = new Circle(size/2);
             this.myBall.setFill(Color.WHITE);
-            this.myBall.setCenterX(screen_width/2);
-            this.myBall.setCenterY(screen_height/2);
+            this.myBall.setCenterX(SIZE/2);
+            this.myBall.setCenterY(SIZE/2);
         }
 
         public Circle getBall() {
@@ -88,10 +81,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        ball = new Ball(BALL_SIZE, BALL_SPEED, SIZE, SIZE, 0, 1);
+        startBall = new Ball(BALL_SIZE, BALL_SPEED, 0, 1);
 
         Group root = new Group();
-        root.getChildren().add(ball.getBall());
+        root.getChildren().add(startBall.getBall());
 
         Scene scene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
         stage.setScene(scene);
@@ -110,7 +103,7 @@ public class Main extends Application {
     // Handle game "rules" for every "moment":
     private void step (double elapsedTime) {
         // update "actors" attributes a little bit at a time and at a "constant" rate (no matter how many frames per second)
-        ball.moveBall(elapsedTime);
+        startBall.moveBall(elapsedTime);
     }
 
 
