@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -34,46 +35,18 @@ public class Main extends Application {
     public static final int BALL_SIZE = 20;
     public static final int BALL_SPEED = 100;
 
+    public static final int PADDLE_WIDTH = 100;
+    public static final int PADDLE_HEIGHT = 20;
+    public static final int PADDLE_SPEED = 20;
+    public static final int PADDLE_X_POS = 100;
+    public static final int PADDLE_Y_POS = 300;
+
+
+    // This scene contains the various shapes and has methods that act upon them
+    private Scene startScene;
+
     private Ball startBall;
-
-    // ball class embodies everything needed
-    public class Ball {
-        private int size;
-        private int speed;
-        private Circle myBall;
-        private int xDirection;
-        private int yDirection;
-
-        public Ball(int size, int speed, int xDirection, int yDirection) {
-            this.size = size;
-            this.speed = speed;
-            this.xDirection = xDirection;
-            this.yDirection = yDirection;
-
-            this.myBall = new Circle(size/2);
-            this.myBall.setFill(Color.WHITE);
-            this.myBall.setCenterX(SIZE/2);
-            this.myBall.setCenterY(SIZE/2);
-        }
-
-        public Circle getBall() {
-            return myBall;
-        }
-
-        public void moveBall(double elapsedTime) {
-            myBall.setCenterX(myBall.getCenterX() + xDirection * speed * elapsedTime);
-            myBall.setCenterY(myBall.getCenterY() + yDirection * speed * elapsedTime);
-
-            if (myBall.getCenterX() - myBall.getRadius() <= 0 || myBall.getCenterX() + myBall.getRadius() >= SIZE) {
-                xDirection *= -1;
-            }
-
-            if (myBall.getCenterY() - myBall.getRadius() <= 0 || myBall.getCenterY() + myBall.getRadius() >= SIZE) {
-                yDirection *= -1;
-            }
-        }
-    }
-
+    private Paddle startPaddle;
 
     /**
      * Initialize what will be displayed.
@@ -82,12 +55,15 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         startBall = new Ball(BALL_SIZE, BALL_SPEED, 0, 1);
+        startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
 
-        Group root = new Group();
-        root.getChildren().add(startBall.getBall());
+        Group root = new Group(startBall.getBall(), startPaddle.getPaddle());
 
-        Scene scene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
-        stage.setScene(scene);
+        startScene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
+
+        startScene.setOnKeyPressed(e -> handleKeyboardInput(e.getCode()));
+
+        stage.setScene(startScene);
 
         stage.setTitle(TITLE);
         stage.show();
@@ -98,6 +74,16 @@ public class Main extends Application {
         animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY)));
         animation.play();
     }
+
+    //handles the keyboard presses -- specifically for moving paddle
+    private void handleKeyboardInput(KeyCode code) {
+        switch(code) {
+            case RIGHT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() + PADDLE_SPEED);
+            case LEFT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() - PADDLE_SPEED);
+        }
+    }
+
+
 
     // the following code has been adapted from the bounce lab
     // Handle game "rules" for every "moment":
