@@ -54,7 +54,7 @@ public class Main extends Application {
     public static final int NUMBER_OF_ROWS = 2;
 
     //game settings constants
-    public static final int REMAINING_LIVES = 3;
+    public static int REMAINING_LIVES = 3;
 
 
     // This scene contains the various shapes and has methods that act upon them
@@ -64,6 +64,8 @@ public class Main extends Application {
     private Paddle startPaddle;
     private ArrayList<Block> blocks;
     private GameSettings gameSettings;
+
+    private Text livesText;
 
     private Group root;
     /**
@@ -140,7 +142,9 @@ public class Main extends Application {
     private void step (double elapsedTime) {
         // update "actors" attributes a little bit at a time and at a "constant" rate (no matter how many frames per second)
         startBall.moveBall(elapsedTime);
-        startBall.wallBounces();
+        if (startBall.wallBounces()) {
+            decreaseLives();
+        }
         handlePaddleIntersection();
         handleBlockIntersection();
     }
@@ -168,12 +172,20 @@ public class Main extends Application {
 
     // sets the text of initial lives
     public void setUpGameSettings() {
-        Text livesText = new Text();
-        livesText.setText("Lives Remaining: " + REMAINING_LIVES);
+        livesText = new Text();
+        livesText.setText("Lives Remaining: " + gameSettings.getLives());
         livesText.setX(10);
         livesText.setY(TOP_ROW_SPACING / 2);
         root.getChildren().add(livesText);
     }
+
+    public void decreaseLives() {
+        if(!gameSettings.decreaseLife()){
+            System.out.println("Game Over");
+        }
+        livesText.setText("Lives Remaining: " + gameSettings.getLives());
+    }
+
     public static void main (String[]args){
             launch(args);
         }

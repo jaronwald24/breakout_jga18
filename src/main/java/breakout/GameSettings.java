@@ -21,6 +21,11 @@ public class GameSettings {
     return score;
   }
 
+  // getter for the lives
+  public int getLives() {
+    return lives;
+  }
+
   //losing a life and returns whether or not the game is over
   public boolean decreaseLife() {
     lives -= 1;

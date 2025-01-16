@@ -47,8 +47,8 @@ public class Ball {
     myBall.setCenterY(myBall.getCenterY() + velocity.getY() * elapsedTime);
   }
 
-  //handles the ball bouncing off the walls
-  public void wallBounces() {
+  //handles the ball bouncing off the walls, returns whether or not you lost a life
+  public boolean wallBounces() {
     if (myBall.getCenterX() - myBall.getRadius() <= 0 || myBall.getCenterX() + myBall.getRadius() >= SIZE) {
       velocity = new Point2D(-velocity.getX(), velocity.getY());
     }
@@ -59,7 +59,10 @@ public class Ball {
 
     if (myBall.getCenterY() + myBall.getRadius() >= SIZE) {
       resetBall();
+      return true;
     }
+
+    return false;
   }
 
   //handle change in vertical direction on a Bounce
