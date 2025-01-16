@@ -54,12 +54,12 @@ public class Ball {
     }
 
     if (myBall.getCenterY() - myBall.getRadius() <= 0 || myBall.getCenterY() + myBall.getRadius() >= SIZE) {
-      velocity = new Point2D(velocity.getX(), -velocity.getY());
+      YChangeBounce();
     }
   }
 
-  //handle change in direction on paddle Bounce
-  public void paddleBounces() {
+  //handle change in vertical direction on a Bounce
+  public void YChangeBounce() {
       velocity = new Point2D(velocity.getX(), -velocity.getY());
   }
 

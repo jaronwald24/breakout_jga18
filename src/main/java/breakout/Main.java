@@ -2,6 +2,7 @@ package breakout;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -57,7 +58,9 @@ public class Main extends Application {
 
     private Ball startBall;
     private Paddle startPaddle;
+    private ArrayList<Block> blocks;
 
+    private Group root;
     /**
      * Initialize what will be displayed.
      */
@@ -66,9 +69,9 @@ public class Main extends Application {
 
         startBall = new Ball(BALL_SIZE);
         startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
-        ArrayList<Block> blocks = setUpBlocks();
+        blocks = setUpBlocks();
 
-        Group root = new Group(startBall.getBall(), startPaddle.getPaddle());
+        root = new Group(startBall.getBall(), startPaddle.getPaddle());
         for (Block block : blocks) {
             root.getChildren().add(block.getBlock());
         }
@@ -100,7 +103,26 @@ public class Main extends Application {
     private void handlePaddleIntersection() {
         Shape intersection = Shape.intersect(startPaddle.getPaddle(), startBall.getBall());
         if (!intersection.getBoundsInLocal().isEmpty()) {
-            startBall.paddleBounces();
+            startBall.YChangeBounce();
+        }
+    }
+
+    private void handleBlockIntersection() {
+        if (blocks.isEmpty()) {
+            return;
+        }
+
+        Iterator<Block> iterator = blocks.iterator();
+        while (iterator.hasNext()) {
+            Block block = iterator.next();
+            Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
+            if (!intersection.getBoundsInLocal().isEmpty()) {
+                startBall.YChangeBounce();
+                if (block.hit()) {
+                    iterator.remove();
+                    root.getChildren().remove(block.getBlock());
+                }
+            }
         }
     }
 
@@ -111,6 +133,7 @@ public class Main extends Application {
         startBall.moveBall(elapsedTime);
         startBall.wallBounces();
         handlePaddleIntersection();
+        handleBlockIntersection();
     }
 
     private ArrayList<Block> setUpBlocks() {
@@ -119,6 +142,7 @@ public class Main extends Application {
         int totalRowWidth = blocksPerRow * Block.width + (blocksPerRow - 1) * BLOCK_X_SPACING;
         int startX = (SIZE - totalRowWidth) / 2;
 
+        //create list of blocks based on the number of rows and blocks per row
         ArrayList<Block> blocks = new ArrayList<>();
         for (int row = 0; row <NUMBER_OF_ROWS ; row++){
             for (int col = 0; col < blocksPerRow; col++) {
