@@ -1,5 +1,7 @@
 package breakout;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -32,14 +34,22 @@ public class Main extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final Paint BACKGROUND = Color.AZURE;
 
+    //ball constants
     public static final int BALL_SIZE = 20;
     public static final int BALL_SPEED = 100;
 
+    //paddle constants
     public static final int PADDLE_WIDTH = 100;
     public static final int PADDLE_HEIGHT = 10;
     public static final int PADDLE_SPEED = 20;
     public static final int PADDLE_X_POS = 100;
     public static final int PADDLE_Y_POS = 350;
+
+    //block constants
+    public static final int BLOCK_X_SPACING = 10;
+    public static final int BLOCK_Y_SPACING = 30;
+    public static final int TOP_ROW_SPACING = 5;
+    public static final int NUMBER_OF_ROWS = 2;
 
 
     // This scene contains the various shapes and has methods that act upon them
@@ -56,8 +66,12 @@ public class Main extends Application {
 
         startBall = new Ball(BALL_SIZE);
         startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
+        ArrayList<Block> blocks = setUpBlocks();
 
         Group root = new Group(startBall.getBall(), startPaddle.getPaddle());
+        for (Block block : blocks) {
+            root.getChildren().add(block.getBlock());
+        }
 
         startScene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
 
@@ -90,9 +104,6 @@ public class Main extends Application {
         }
     }
 
-
-
-
     // the following code has been adapted from the bounce lab
     // Handle game "rules" for every "moment":
     private void step (double elapsedTime) {
@@ -100,6 +111,25 @@ public class Main extends Application {
         startBall.moveBall(elapsedTime);
         startBall.wallBounces();
         handlePaddleIntersection();
+    }
+
+    private ArrayList<Block> setUpBlocks() {
+        //get number of blocks per row and the start
+        int blocksPerRow = (SIZE - (2 * BLOCK_X_SPACING))  / Block.width;
+        int totalRowWidth = blocksPerRow * Block.width + (blocksPerRow - 1) * BLOCK_X_SPACING;
+        int startX = (SIZE - totalRowWidth) / 2;
+
+        ArrayList<Block> blocks = new ArrayList<>();
+        for (int row = 0; row <NUMBER_OF_ROWS ; row++){
+            for (int col = 0; col < blocksPerRow; col++) {
+                double x = startX + col * (Block.width + BLOCK_X_SPACING);
+                double y = row * (Block.height + BLOCK_Y_SPACING);
+
+                Block block = new Block(x, y + TOP_ROW_SPACING, false, 1);
+                blocks.add(block);
+            }
+        }
+        return blocks;
     }
 
 

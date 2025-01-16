@@ -3,6 +3,7 @@ package breakout;
 
 import javafx.scene.shape.Rectangle;
 
+//
 public class Block {
   //standard information
   public static final int width = 50;
@@ -26,10 +27,18 @@ public class Block {
     myBlock.setY(yPosition);
   }
 
+  //returns the rectangle object
+  public Rectangle getBlock() {
+    return myBlock;
+  }
+
+
+  // this checks if a block has been destroyed
   public boolean isDestroyed() {
     return health <= 0;
   }
 
+  //this handles whenever a block is hit by the ball
   public boolean hit() {
     health--;
     return isDestroyed();
