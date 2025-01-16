@@ -14,6 +14,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.Random;
@@ -49,8 +50,11 @@ public class Main extends Application {
     //block constants
     public static final int BLOCK_X_SPACING = 10;
     public static final int BLOCK_Y_SPACING = 30;
-    public static final int TOP_ROW_SPACING = 5;
+    public static final int TOP_ROW_SPACING = 30;
     public static final int NUMBER_OF_ROWS = 2;
+
+    //game settings constants
+    public static final int REMAINING_LIVES = 3;
 
 
     // This scene contains the various shapes and has methods that act upon them
@@ -59,6 +63,7 @@ public class Main extends Application {
     private Ball startBall;
     private Paddle startPaddle;
     private ArrayList<Block> blocks;
+    private GameSettings gameSettings;
 
     private Group root;
     /**
@@ -70,16 +75,20 @@ public class Main extends Application {
         startBall = new Ball(BALL_SIZE);
         startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
         blocks = setUpBlocks();
+        gameSettings = new GameSettings(REMAINING_LIVES, "Level 1");
 
         root = new Group(startBall.getBall(), startPaddle.getPaddle());
+
+        //add blocks to root
         for (Block block : blocks) {
             root.getChildren().add(block.getBlock());
         }
+        //add text to root
+        setUpGameSettings();
+
 
         startScene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
-
         startScene.setOnKeyPressed(e -> handleKeyboardInput(e.getCode()));
-
         stage.setScene(startScene);
 
         stage.setTitle(TITLE);
@@ -136,6 +145,7 @@ public class Main extends Application {
         handleBlockIntersection();
     }
 
+    //create the arrays of blocks to start game
     private ArrayList<Block> setUpBlocks() {
         //get number of blocks per row and the start
         int blocksPerRow = (SIZE - (2 * BLOCK_X_SPACING))  / Block.width;
@@ -156,7 +166,14 @@ public class Main extends Application {
         return blocks;
     }
 
-
+    // sets the text of initial lives
+    public void setUpGameSettings() {
+        Text livesText = new Text();
+        livesText.setText("Lives Remaining: " + REMAINING_LIVES);
+        livesText.setX(10);
+        livesText.setY(TOP_ROW_SPACING / 2);
+        root.getChildren().add(livesText);
+    }
     public static void main (String[]args){
             launch(args);
         }

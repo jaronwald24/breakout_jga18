@@ -53,8 +53,12 @@ public class Ball {
       velocity = new Point2D(-velocity.getX(), velocity.getY());
     }
 
-    if (myBall.getCenterY() - myBall.getRadius() <= 0 || myBall.getCenterY() + myBall.getRadius() >= SIZE) {
+    if (myBall.getCenterY() - myBall.getRadius() <= 0 ) {
       YChangeBounce();
+    }
+
+    if (myBall.getCenterY() + myBall.getRadius() >= SIZE) {
+      resetBall();
     }
   }
 
@@ -68,8 +72,11 @@ public class Ball {
     return min + DICE.nextInt(max - min) + 1;
   }
 
-  private void initalizeMovement() {
-    Random random = new Random();
+  private void resetBall() {
+    myBall.setCenterX(getRandomInRange(size, SIZE - size));
+    myBall.setCenterY(getRandomInRange(size, SIZE - size));
 
+    velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }
+
 }

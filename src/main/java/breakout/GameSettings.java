@@ -5,8 +5,9 @@ public class GameSettings {
   private int score;
   private int lives;
 
-  public GameSettings(String level) {
+  public GameSettings(int lives, String level) {
     this.level = level;
+    this.lives = lives;
     score = 0;
   }
 
