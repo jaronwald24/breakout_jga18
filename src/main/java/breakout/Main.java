@@ -83,7 +83,6 @@ public class Main extends Application {
         levelTranslator = new LevelTranslator();
 
         blocks = setUpBlocks();
-        System.out.println(blocks);
         root = new Group(startBall.getBall(), startPaddle.getPaddle());
 
         //add blocks to root
@@ -104,7 +103,13 @@ public class Main extends Application {
         // set the animation to let the game run
         Timeline animation = new Timeline();
         animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY)));
+        animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> {
+          try {
+            step(SECOND_DELAY);
+          } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+          }
+        }));
         animation.play();
     }
 
@@ -123,11 +128,7 @@ public class Main extends Application {
         }
     }
 
-    private void handleBlockIntersection() {
-        if (blocks.isEmpty()) {
-            return;
-        }
-
+    private void handleBlockIntersection() throws FileNotFoundException {
         //The iterator from line 127-128 was prompted using ChatGPT after noticing that my solution was inefficient and quadratic runtime.
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
@@ -138,6 +139,10 @@ public class Main extends Application {
                 if (block.hit()) {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
+
+                    if (blocks.isEmpty()) {
+                        setUpNextLevel();
+                    }
                 }
             }
         }
@@ -145,7 +150,7 @@ public class Main extends Application {
 
     // the following code has been adapted from the bounce lab
     // Handle game "rules" for every "moment":
-    private void step (double elapsedTime) {
+    private void step (double elapsedTime) throws FileNotFoundException {
         // update "actors" attributes a little bit at a time and at a "constant" rate (no matter how many frames per second)
         startBall.moveBall(elapsedTime);
         if (startBall.wallBounces()) {
@@ -163,8 +168,7 @@ public class Main extends Application {
         int startX = (SIZE - totalRowWidth) / 2;
 
         //create list of blocks based on the number of rows and blocks per row
-        ArrayList<Block> blocks = new ArrayList<>();
-        blocks = levelTranslator.generateBlocksFromFile(gameSettings.getLevel());
+        ArrayList<Block> blocks = levelTranslator.generateBlocksFromFile(gameSettings.getLevel());
 
         return blocks;
     }
@@ -176,6 +180,16 @@ public class Main extends Application {
         livesText.setX(10);
         livesText.setY(TOP_ROW_SPACING / 2);
         root.getChildren().add(livesText);
+    }
+
+    // sets the next level up with bricks
+    public void setUpNextLevel() throws FileNotFoundException {
+        gameSettings.advanceToNextLevel();
+        blocks = setUpBlocks();
+        //add blocks to root
+        for (Block block : blocks) {
+            root.getChildren().add(block.getBlock());
+        }
     }
 
     public void decreaseLives() {
