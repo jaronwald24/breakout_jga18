@@ -62,6 +62,7 @@ public class Main extends Application {
     // This scene contains the various shapes and has methods that act upon them
     private Scene startScene;
 
+    private Timeline animation;
     private Ball startBall;
     private Paddle startPaddle;
     private ArrayList<Block> blocks;
@@ -101,7 +102,7 @@ public class Main extends Application {
         stage.show();
 
         // set the animation to let the game run
-        Timeline animation = new Timeline();
+        animation = new Timeline();
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> {
           try {
@@ -194,9 +195,21 @@ public class Main extends Application {
 
     public void decreaseLives() {
         if(!gameSettings.decreaseLife()){
-            System.out.println("Game Over");
+            endGame();
         }
         livesText.setText("Lives Remaining: " + gameSettings.getLives());
+    }
+
+    //ends the game, clears elements
+    public void endGame() {
+        animation.stop();
+        root.getChildren().removeAll(root.getChildren());
+        Text endText = new Text();
+        endText.setText("Game Over");
+        endText.setX(10);
+        endText.setY(TOP_ROW_SPACING / 2);
+        endText.setFill(Color.BLACK);
+        root.getChildren().add(endText);
     }
 
     public static void main (String[]args){
