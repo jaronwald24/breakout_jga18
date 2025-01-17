@@ -26,6 +26,11 @@ public class GameSettings {
     return lives;
   }
 
+  //getter for the level
+  public String getLevel() {
+    return level;
+  }
+
   //losing a life and returns whether or not the game is over
   public boolean decreaseLife() {
     lives -= 1;

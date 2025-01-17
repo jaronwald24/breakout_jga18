@@ -18,11 +18,11 @@ public class LevelTranslator {
   }
 
   // generates the blocks from the text file
-  private ArrayList<Block> generateBlocksFromFile(String fileName, Group root)
+  public ArrayList<Block> generateBlocksFromFile(String fileName)
       throws FileNotFoundException {
 
-    File level = new File("src/main/resources/" + fileName);
-    Scanner scanner = new Scanner(level);
+    File levelFile = new File("src/main/resources/" + fileName);
+    Scanner scanner = new Scanner(levelFile);
 
     createdBlocks = new ArrayList<>();
 
