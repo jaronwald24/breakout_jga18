@@ -123,6 +123,7 @@ public class Main extends Application {
             return;
         }
 
+        //The iterator from line 127-128 was prompted using ChatGPT after noticing that my solution was inefficient and quadratic runtime.
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
             Block block = iterator.next();
@@ -163,7 +164,7 @@ public class Main extends Application {
                 double x = startX + col * (Block.width + BLOCK_X_SPACING);
                 double y = row * (Block.height + BLOCK_Y_SPACING);
 
-                Block block = new Block(x, y + TOP_ROW_SPACING, false, 1);
+                Block block = new Block(x, y + TOP_ROW_SPACING, false, false,1);
                 blocks.add(block);
             }
         }

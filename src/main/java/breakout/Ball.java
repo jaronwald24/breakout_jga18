@@ -14,8 +14,8 @@ public class Ball {
   private Circle myBall;
 
 
-  public static final int SLOW_BALL_SPEED = 120;
-  public static final int FAST__BALL_SPEED = 200;
+  public static final int SLOW_BALL_SPEED = 200;
+  public static final int FAST__BALL_SPEED = 250;
 
   //this code was taken from the example code for bouncer lab
   // share one "dice" among all blocks (improves overall randomness of game)
@@ -75,6 +75,7 @@ public class Ball {
     return min + DICE.nextInt(max - min) + 1;
   }
 
+  //Resets the location of the ball and sets it moving upward
   private void resetBall() {
     myBall.setCenterX(getRandomInRange(size, SIZE - size));
     myBall.setCenterY(getRandomInRange(size, SIZE - size));

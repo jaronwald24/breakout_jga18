@@ -14,12 +14,14 @@ public class Block {
 
   //potential add ons
   private boolean isPowerUp;
+  private boolean isUnbreakable;
   private int health;
 
-  public Block(double xPosition, double yPosition, boolean isPowerUp, int health) {
+  public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
     this.isPowerUp = isPowerUp;
+    this.isUnbreakable = isUnbreakable;
     this.health = health;
 
     myBlock = new Rectangle(width, height);
