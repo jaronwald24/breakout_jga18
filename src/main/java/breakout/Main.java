@@ -82,6 +82,7 @@ public class Main extends Application {
         stage.setScene(splashScene);
         stage.show();
 
+        //on click of the enter button, the game begins
         splashScene.setOnKeyPressed(e -> {
           if (Objects.requireNonNull(e.getCode()) == KeyCode.ENTER) {
             try {
@@ -94,6 +95,7 @@ public class Main extends Application {
 
     }
 
+    //initializes all of the game setup and animation
     private void showGameScreen(Stage stage) throws FileNotFoundException {
         startBall = new Ball(BALL_SIZE);
         startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
