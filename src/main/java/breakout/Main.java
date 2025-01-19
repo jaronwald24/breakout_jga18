@@ -3,11 +3,13 @@ package breakout;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -75,7 +77,24 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws FileNotFoundException {
+        SplashScreen splashScreen = new SplashScreen();
+        Scene splashScene = splashScreen.createIntroScreen(stage, "Welcome", "Use the arrows to move the paddle.");
+        stage.setScene(splashScene);
+        stage.show();
 
+        splashScene.setOnKeyPressed(e -> {
+          if (Objects.requireNonNull(e.getCode()) == KeyCode.ENTER) {
+            try {
+              showGameScreen(stage);
+            } catch (FileNotFoundException ex) {
+              throw new RuntimeException(ex);
+            }
+          }
+        });
+
+    }
+
+    private void showGameScreen(Stage stage) throws FileNotFoundException {
         startBall = new Ball(BALL_SIZE);
         startPaddle = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_X_POS, PADDLE_Y_POS);
         gameSettings = new GameSettings(REMAINING_LIVES, "lvl_01.txt");
@@ -103,11 +122,11 @@ public class Main extends Application {
         animation = new Timeline();
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> {
-          try {
-            step(SECOND_DELAY);
-          } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
-          }
+            try {
+                step(SECOND_DELAY);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }));
         animation.play();
     }
