@@ -67,6 +67,7 @@ public class Main extends Application {
 
     private Text livesText;
     private Text scoreText;
+    private Text levelText;
 
     private Group root;
     /**
@@ -178,10 +179,16 @@ public class Main extends Application {
 
     // sets the text of initial lives
     public void setUpGameSettings() {
-        livesText = createText("Lives Remaining: " + gameSettings.getLives(), 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
-        scoreText = createText("Score: " + gameSettings.getScore(), SIZE / 2, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
+        livesText = createText("Lives Remaining: " + gameSettings.getLives(), 10, TOP_ROW_SPACING, Color.WHITE, Font.font("Arial", 16));
+        scoreText = createText("Score: " + gameSettings.getScore(), SIZE / 2.25, TOP_ROW_SPACING, Color.WHITE, Font.font("Arial", 16));
 
-        root.getChildren().addAll(livesText, scoreText);
+        // Get the integer part of the level
+        String level = gameSettings.getLevel();
+        int levelNumber = Integer.parseInt(level.substring(4, 6));
+
+        levelText = createText("Current Level: " + levelNumber, SIZE / 1.5, TOP_ROW_SPACING, Color.WHITE, Font.font("Arial", 16));
+
+        root.getChildren().addAll(livesText, scoreText, levelText);
     }
 
     // sets the next level up with bricks or user wins the game
@@ -191,6 +198,10 @@ public class Main extends Application {
         if (!nextLevelExists) {
             return false;
         }
+
+        String level = gameSettings.getLevel();
+        int levelNumber = Integer.parseInt(level.substring(4, 6));
+        levelText.setText("Current level: " + levelNumber);
 
         blocks = setUpBlocks();
 
@@ -219,7 +230,7 @@ public class Main extends Application {
             message = "Game Over, you lost!";
         }
 
-        Text endText= createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
+        Text endText = createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 40));
 
         root.getChildren().add(endText);
     }
