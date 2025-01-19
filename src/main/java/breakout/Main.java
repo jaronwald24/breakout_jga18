@@ -132,17 +132,16 @@ public class Main extends Application {
             Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 startBall.YChangeBounce();
+                gameSettings.incrementScore(block);
                 if (block.hit()) {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
-                    System.out.println(blocks.size());
                 }
             }
         }
         //level or game is over
         if (blocks.isEmpty()) {
             boolean nextLevelExists = gameOverOrSetUpNextLevel();
-            System.out.println(nextLevelExists);
             if (!nextLevelExists) {
                endGame(true);
             }

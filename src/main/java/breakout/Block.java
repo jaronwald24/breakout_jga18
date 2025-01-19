@@ -16,13 +16,16 @@ public class Block {
   private boolean isPowerUp;
   private boolean isUnbreakable;
   private int health;
+  private int startingHealth;
 
   public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
     this.isPowerUp = isPowerUp;
     this.isUnbreakable = isUnbreakable;
+
     this.health = health;
+    this.startingHealth = health;
 
     myBlock = new Rectangle(width, height);
     myBlock.setX(xPosition);

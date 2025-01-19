@@ -14,7 +14,8 @@ public class GameSettings {
   }
 
   //increase score when block is hit
-  public void incrementScore() {
+  public void incrementScore(Block block) {
+    //handle power ups here
     score++;
   }
 
