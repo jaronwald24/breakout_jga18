@@ -134,7 +134,7 @@ public class Main extends Application {
             Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 startBall.YChangeBounce();
-                gameSettings.incrementScore(block);
+                incrementScore(block);
                 if (block.hit()) {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
@@ -233,6 +233,12 @@ public class Main extends Application {
         text.setFill(color);
         text.setFont(font);
         return text;
+    }
+
+    //increment score in game settings then display it
+    public void incrementScore(Block block) {
+        gameSettings.incrementScore(block);
+        scoreText.setText("Score: " + gameSettings.getScore());
     }
 
     public static void main (String[]args){
