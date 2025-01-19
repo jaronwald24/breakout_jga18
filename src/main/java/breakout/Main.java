@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -65,6 +66,7 @@ public class Main extends Application {
     private LevelTranslator levelTranslator;
 
     private Text livesText;
+    private Text scoreText;
 
     private Group root;
     /**
@@ -176,11 +178,10 @@ public class Main extends Application {
 
     // sets the text of initial lives
     public void setUpGameSettings() {
-        livesText = new Text();
-        livesText.setText("Lives Remaining: " + gameSettings.getLives());
-        livesText.setX(10);
-        livesText.setY(TOP_ROW_SPACING / 2);
-        root.getChildren().add(livesText);
+        livesText = createText("Lives Remaining: " + gameSettings.getLives(), 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
+        scoreText = createText("Score: " + gameSettings.getScore(), SIZE / 2, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
+
+        root.getChildren().addAll(livesText, scoreText);
     }
 
     // sets the next level up with bricks or user wins the game
@@ -211,16 +212,27 @@ public class Main extends Application {
     public void endGame(boolean winner) {
         animation.stop();
         root.getChildren().removeAll(root.getChildren());
-        Text endText = new Text();
+        String message;
         if (winner) {
-            endText.setText("Game Over, you won!");
+            message = "Game Over, you won!";
         } else {
-            endText.setText("Game Over, you lost!");
+            message = "Game Over, you lost!";
         }
-        endText.setX(10);
-        endText.setY(TOP_ROW_SPACING / 2);
-        endText.setFill(Color.BLACK);
+
+        Text endText= createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 20));
+
         root.getChildren().add(endText);
+    }
+
+    //creates, sets, and places text
+    private Text createText(String content, double x, double y, Color color, Font font) {
+        Text text = new Text();
+        text.setText(content);
+        text.setX(x);
+        text.setY(y);
+        text.setFill(color);
+        text.setFont(font);
+        return text;
     }
 
     public static void main (String[]args){
