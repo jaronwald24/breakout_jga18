@@ -1,10 +1,8 @@
 package breakout;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -13,13 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.util.Random;
 
 
 /**
@@ -140,12 +135,18 @@ public class Main extends Application {
                 if (block.hit()) {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
-
-                    if (blocks.isEmpty()) {
-                        setUpNextLevel();
-                    }
+                    System.out.println(blocks.size());
                 }
             }
+        }
+        //level or game is over
+        if (blocks.isEmpty()) {
+            boolean nextLevelExists = gameOverOrSetUpNextLevel();
+            System.out.println(nextLevelExists);
+            if (!nextLevelExists) {
+               endGame(true);
+            }
+
         }
     }
 
@@ -183,29 +184,40 @@ public class Main extends Application {
         root.getChildren().add(livesText);
     }
 
-    // sets the next level up with bricks
-    public void setUpNextLevel() throws FileNotFoundException {
-        gameSettings.advanceToNextLevel();
+    // sets the next level up with bricks or user wins the game
+    public boolean gameOverOrSetUpNextLevel() throws FileNotFoundException {
+        boolean nextLevelExists = gameSettings.advanceToNextLevel();
+
+        if (!nextLevelExists) {
+            return false;
+        }
+
         blocks = setUpBlocks();
+
         //add blocks to root
         for (Block block : blocks) {
             root.getChildren().add(block.getBlock());
         }
+        return true;
     }
 
     public void decreaseLives() {
         if(!gameSettings.decreaseLife()){
-            endGame();
+            endGame(false);
         }
         livesText.setText("Lives Remaining: " + gameSettings.getLives());
     }
 
     //ends the game, clears elements
-    public void endGame() {
+    public void endGame(boolean winner) {
         animation.stop();
         root.getChildren().removeAll(root.getChildren());
         Text endText = new Text();
-        endText.setText("Game Over");
+        if (winner) {
+            endText.setText("Game Over, you won!");
+        } else {
+            endText.setText("Game Over, you lost!");
+        }
         endText.setX(10);
         endText.setY(TOP_ROW_SPACING / 2);
         endText.setFill(Color.BLACK);

@@ -78,7 +78,7 @@ public class Ball {
   //Resets the location of the ball and sets it moving upward
   private void resetBall() {
     myBall.setCenterX(getRandomInRange(size, SIZE - size));
-    myBall.setCenterY(getRandomInRange(size, SIZE - size));
+    myBall.setCenterY(getRandomInRange(size, SIZE - size + 100));
 
     velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }

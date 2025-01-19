@@ -21,6 +21,8 @@ public class LevelTranslator {
   public ArrayList<Block> generateBlocksFromFile(String fileName)
       throws FileNotFoundException {
 
+    createdBlocks.clear();
+
     File levelFile = new File("src/main/resources/" + fileName);
     Scanner scanner = new Scanner(levelFile);
 

@@ -1,5 +1,7 @@
 package breakout;
 
+import java.io.File;
+
 public class GameSettings {
   private String level;
   private int score;
@@ -41,11 +43,18 @@ public class GameSettings {
     return lives > 0;
   }
 
-  //advance to the next level
-  public void advanceToNextLevel() {
+  //advance to the next level and returns whether or not you win
+  public boolean advanceToNextLevel() {
     int currentLevel = Integer.parseInt(level.substring(4, 6));
     String nextLevel = String.format("lvl_%02d.txt", currentLevel + 1);
-    System.out.println("New Level: " + nextLevel);
-    setLevel(nextLevel);
+
+    //check if the file exists
+    File file = new File("src/main/resources/" + nextLevel);
+    System.out.println(file + " " + file.exists());
+    if (file.exists()) {
+      setLevel(nextLevel);
+      return true;
+    }
+    return false;
   }
 }
