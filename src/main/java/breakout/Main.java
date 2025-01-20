@@ -253,7 +253,8 @@ public class Main extends Application {
 
         Text endText = createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 40));
 
-        root.getChildren().add(endText);
+        root.getChildren().addAll(endText, livesText, scoreText);
+
     }
 
     //creates, sets, and places text
