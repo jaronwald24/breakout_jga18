@@ -31,28 +31,28 @@ public class Paddle {
   }
 
   public void setPaddlePosition(double xPosition, String level) {
+    double leftBoundary;
+    double rightBoundary;
+
+    // use the levels to determine boundaries for the paddle (higher level = more flexibility)
     if (level.equals("lvl_01.txt")) {
-      if (xPosition < 0) {
-        xPosition = 0;
-      }
-      else if (xPosition > GAME_SIZE - width) {
-        xPosition = GAME_SIZE - width;
-      }
+      leftBoundary = 0;
+      rightBoundary = GAME_SIZE - width;
     } else if (level.equals("lvl_02.txt")) {
-      if (xPosition < -myPaddle.getWidth() / 2) {
-        xPosition = -myPaddle.getWidth() / 2;
-      }
-      else if (xPosition > GAME_SIZE - width + myPaddle.getWidth() / 2) {
-        xPosition = GAME_SIZE - width + myPaddle.getWidth() / 2;
-      }
+      leftBoundary = -myPaddle.getWidth() / 2;
+      rightBoundary = GAME_SIZE - width + myPaddle.getWidth() / 2;
     } else {
-      if (xPosition < -myPaddle.getWidth()) {
-        xPosition = -myPaddle.getWidth();
-      }
-      else if (xPosition > GAME_SIZE - width + myPaddle.getWidth()) {
-        xPosition = GAME_SIZE - width + myPaddle.getWidth();
-      }
+      leftBoundary = -myPaddle.getWidth();
+      rightBoundary = GAME_SIZE - width + myPaddle.getWidth();
     }
+
+    // Apply boundaries
+    if (xPosition < leftBoundary) {
+      xPosition = leftBoundary;
+    } else if (xPosition > rightBoundary) {
+      xPosition = rightBoundary;
+    }
+
     myPaddle.setX(xPosition);
   }
 }
