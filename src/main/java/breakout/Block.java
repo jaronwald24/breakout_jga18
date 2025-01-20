@@ -64,14 +64,21 @@ public class Block {
   public boolean hit() {
     health--;
     updateBlockColor();
-
     return isDestroyed();
   }
 
+  //check if a block is a power up
+  public boolean isPowerUpBlock() {
+    return isPowerUp;
+  }
+
+
   // changes the blocks color after hits or at start
   private void updateBlockColor() {
-    if (colorMapper.containsKey(health)) {
+    if (colorMapper.containsKey(health) && !isPowerUpBlock()) {
       myBlock.setFill(colorMapper.get(health));
+    } else {
+      myBlock.setFill(Color.GOLD);
     }
   }
 }
