@@ -242,6 +242,7 @@ public class Main extends Application {
         animation.stop();
         root.getChildren().removeAll(root.getChildren());
         String message;
+
         if (winner) {
             message = "Game Over, you won!";
         } else {
@@ -249,15 +250,26 @@ public class Main extends Application {
         }
 
         Text endText = createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 40));
-
+        Text instructions = createText("Press enter to play again.", 10, TOP_ROW_SPACING / 3.0, Color.BLACK, Font.font("Arial", 16));
         //lines 260-263 were AI generated to assist with spacing
 
         // Create a VBox to hold all the elements and center them
         VBox layout = new VBox(20); // Spacing of 20 between elements
         layout.setAlignment(Pos.CENTER); // Center elements horizontally and vertically
-        layout.getChildren().addAll(endText, livesText, scoreText);
+        layout.getChildren().addAll(endText, livesText, scoreText, instructions);
 
         root.getChildren().add(layout);
+
+        startScene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                try {
+                    REMAINING_LIVES = 3;
+                    showGameScreen((Stage) root.getScene().getWindow());
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
     }
 

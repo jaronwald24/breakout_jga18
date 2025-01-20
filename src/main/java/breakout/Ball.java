@@ -14,7 +14,8 @@ public class Ball {
   private Circle myBall;
 
 
-  public static final int SLOW_BALL_SPEED = 200;
+  private
+  static final int SLOW_BALL_SPEED = 200;
   public static final int FAST__BALL_SPEED = 250;
 
   //this code was taken from the example code for bouncer lab
