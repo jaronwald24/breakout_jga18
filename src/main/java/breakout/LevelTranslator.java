@@ -29,6 +29,20 @@ public class LevelTranslator {
     createdBlocks = new ArrayList<>();
 
     int row = 0;
+    int totalCols = 0;
+
+    // get the maximum number of cols
+    while (scanner.hasNextLine()) {
+      String line = scanner.nextLine();
+      totalCols = Math.max(totalCols, line.split(" ").length);
+    }
+    scanner.close();
+    scanner = new Scanner(levelFile);
+
+    //logic adapted from Main for dynamic block spacing
+    double totalRowWidth = totalCols * Block.width + (totalCols - 1) * BLOCK_X_SPACING;
+    double startX = (Main.SIZE - totalRowWidth) / 2;
+
     // loop through each row
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
@@ -42,7 +56,7 @@ public class LevelTranslator {
         }
 
         // get the block position
-        double xPosition = col * (Block.width + BLOCK_X_SPACING);
+        double xPosition = startX + col * (Block.width + BLOCK_X_SPACING);
         double yPosition = row * (Block.height + BLOCK_Y_SPACING);
 
         Block newBlock;

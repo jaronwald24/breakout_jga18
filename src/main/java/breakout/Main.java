@@ -7,10 +7,12 @@ import java.util.Objects;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
@@ -187,11 +189,6 @@ public class Main extends Application {
 
     //create the arrays of blocks to start game
     private ArrayList<Block> setUpBlocks() throws FileNotFoundException {
-        //get number of blocks per row and the start
-        int blocksPerRow = (SIZE - (2 * BLOCK_X_SPACING))  / Block.width;
-        int totalRowWidth = blocksPerRow * Block.width + (blocksPerRow - 1) * BLOCK_X_SPACING;
-        int startX = (SIZE - totalRowWidth) / 2;
-
         //create list of blocks based on the number of rows and blocks per row
         ArrayList<Block> blocks = levelTranslator.generateBlocksFromFile(gameSettings.getLevel());
 
@@ -253,7 +250,14 @@ public class Main extends Application {
 
         Text endText = createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 40));
 
-        root.getChildren().addAll(endText, livesText, scoreText);
+        //lines 260-263 were AI generated to assist with spacing
+
+        // Create a VBox to hold all the elements and center them
+        VBox layout = new VBox(20); // Spacing of 20 between elements
+        layout.setAlignment(Pos.CENTER); // Center elements horizontally and vertically
+        layout.getChildren().addAll(endText, livesText, scoreText);
+
+        root.getChildren().add(layout);
 
     }
 
