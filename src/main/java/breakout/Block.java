@@ -1,7 +1,12 @@
 package breakout;
 
 
+import static java.util.Map.entry;
+
+import java.util.HashMap;
+import java.util.Map;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 //
 public class Block {
@@ -18,6 +23,16 @@ public class Block {
   private int health;
   private int startingHealth;
 
+  //Color mapper
+  private Map<Integer, Color> colorMapper = Map.ofEntries(
+      entry(0, Color.BLACK),
+      entry(1, Color.GREEN),
+      entry(2, Color.YELLOW),
+      entry(3, Color.ORANGE),
+      entry(4, Color.RED),
+      entry(5, Color.DARKRED)
+  );
+
   public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
@@ -30,6 +45,8 @@ public class Block {
     myBlock = new Rectangle(width, height);
     myBlock.setX(xPosition);
     myBlock.setY(yPosition);
+
+    updateBlockColor();
   }
 
   //returns the rectangle object
@@ -46,6 +63,15 @@ public class Block {
   //this handles whenever a block is hit by the ball
   public boolean hit() {
     health--;
+    updateBlockColor();
+
     return isDestroyed();
+  }
+
+  // changes the blocks color after hits or at start
+  private void updateBlockColor() {
+    if (colorMapper.containsKey(health)) {
+      myBlock.setFill(colorMapper.get(health));
+    }
   }
 }
