@@ -74,7 +74,7 @@ public class Main extends Application {
     private Text scoreText;
     private Text levelText;
 
-    private ArrayList<PowerUp> activePowerUps;
+    private ArrayList<PowerUp> activePowerUps = new ArrayList<>();
 
     private Group root;
     /**
@@ -198,6 +198,7 @@ public class Main extends Application {
         }
         handlePaddleIntersection();
         handleBlockIntersection();
+        powerUpPaddleInteraction(elapsedTime);
     }
 
     //create the arrays of blocks to start game
@@ -327,7 +328,7 @@ public class Main extends Application {
             Shape intersection = Shape.intersect(startPaddle.getPaddle(), powerUp.getRectangle());
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 applyPowerUp(powerUp.getPowerUpName());
-                root.getChildren().remove(intersection);
+                root.getChildren().remove(powerUp.getRectangle());
                 iterator.remove();
             }
 
