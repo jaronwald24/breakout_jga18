@@ -71,6 +71,10 @@ public class Ball {
       velocity = new Point2D(velocity.getX(), -velocity.getY());
   }
 
+  public void setXVelocity(double xVelocity) {
+    velocity = new Point2D(xVelocity, velocity.getY());
+  }
+
   //gets a random, non zero value in between min and max
   private int getRandomInRange(int min, int max) {
     return min + DICE.nextInt(max - min) + 1;

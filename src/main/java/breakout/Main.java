@@ -40,7 +40,7 @@ public class Main extends Application {
 
     //ball constants
     public static final int BALL_SIZE = 20;
-    public static final int BALL_SPEED = 100;
+    public static final int BALL_SPEED = 200;
 
     //paddle constants
     public static final int PADDLE_WIDTH = 100;
@@ -146,6 +146,7 @@ public class Main extends Application {
     private void handlePaddleIntersection() {
         Shape intersection = Shape.intersect(startPaddle.getPaddle(), startBall.getBall());
         if (!intersection.getBoundsInLocal().isEmpty()) {
+            handlePositionalBounce();
             startBall.YChangeBounce();
         }
     }
@@ -289,6 +290,20 @@ public class Main extends Application {
         gameSettings.incrementScore(block);
         scoreText.setText("Score: " + gameSettings.getScore());
     }
+
+    private void handlePositionalBounce() {
+        double horizontalBallPosition = startBall.getBall().getCenterX();
+        double horizontalPaddlePosition = startPaddle.getPaddle().getX();
+
+        double paddleWidth = startPaddle.getPaddle().getWidth();
+        // The calculation of value * 2 - 1 gets the relative position from (-1,1)
+        double relativeHitPosition = (horizontalBallPosition - horizontalPaddlePosition) / paddleWidth * 2 - 1;
+
+        double newHorizontalVelocity = relativeHitPosition * BALL_SPEED;
+        startBall.setXVelocity(newHorizontalVelocity);
+
+    }
+
 
     public static void main (String[]args){
             launch(args);
