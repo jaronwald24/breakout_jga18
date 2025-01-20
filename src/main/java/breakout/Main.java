@@ -138,8 +138,8 @@ public class Main extends Application {
     //handles the keyboard presses -- specifically for moving paddle
     private void handleKeyboardInput(KeyCode code) {
         switch(code) {
-            case RIGHT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() + PADDLE_SPEED);
-            case LEFT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() - PADDLE_SPEED);
+            case RIGHT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() + PADDLE_SPEED, gameSettings.getLevel());
+            case LEFT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() - PADDLE_SPEED, gameSettings.getLevel());
         }
     }
 

@@ -1,5 +1,6 @@
 package breakout;
 
+import java.util.Objects;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -29,12 +30,28 @@ public class Paddle {
     return myPaddle;
   }
 
-  public void setPaddlePosition(double xPosition) {
-    if (xPosition < 0) {
-      xPosition = 0;
-    }
-    else if (xPosition > GAME_SIZE - width) {
-      xPosition = GAME_SIZE - width;
+  public void setPaddlePosition(double xPosition, String level) {
+    if (level.equals("lvl_01.txt")) {
+      if (xPosition < 0) {
+        xPosition = 0;
+      }
+      else if (xPosition > GAME_SIZE - width) {
+        xPosition = GAME_SIZE - width;
+      }
+    } else if (level.equals("lvl_02.txt")) {
+      if (xPosition < -myPaddle.getWidth() / 2) {
+        xPosition = -myPaddle.getWidth() / 2;
+      }
+      else if (xPosition > GAME_SIZE - width + myPaddle.getWidth() / 2) {
+        xPosition = GAME_SIZE - width + myPaddle.getWidth() / 2;
+      }
+    } else {
+      if (xPosition < -myPaddle.getWidth()) {
+        xPosition = -myPaddle.getWidth();
+      }
+      else if (xPosition > GAME_SIZE - width + myPaddle.getWidth()) {
+        xPosition = GAME_SIZE - width + myPaddle.getWidth();
+      }
     }
     myPaddle.setX(xPosition);
   }
