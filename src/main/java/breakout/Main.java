@@ -162,6 +162,10 @@ public class Main extends Application {
             Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 startBall.YChangeBounce();
+                if (block.isUnbreakable()) {
+                    continue;
+                }
+
                 incrementScore(block);
 
                 // handle powerups
@@ -176,15 +180,15 @@ public class Main extends Application {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
                 }
+
             }
         }
         //level or game is over
-        if (blocks.isEmpty()) {
+        if (allBreakableBlocksCleared()) {
             boolean nextLevelExists = gameOverOrSetUpNextLevel();
             if (!nextLevelExists) {
                endGame(true);
             }
-
         }
     }
 
@@ -225,6 +229,11 @@ public class Main extends Application {
 
     // sets the next level up with bricks or user wins the game
     public boolean gameOverOrSetUpNextLevel() throws FileNotFoundException {
+        for (Block block : blocks) {
+            if (block.isUnbreakable()) {
+                root.getChildren().remove(block.getBlock());
+            }
+        }
         boolean nextLevelExists = gameSettings.advanceToNextLevel();
 
         if (!nextLevelExists) {
@@ -362,6 +371,16 @@ public class Main extends Application {
             }
             //add more if needed
         }
+    }
+
+    private boolean allBreakableBlocksCleared() {
+        for (Block block : blocks) {
+            // if a block is breakable
+            if (!block.isUnbreakable()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

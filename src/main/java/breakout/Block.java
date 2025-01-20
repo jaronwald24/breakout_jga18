@@ -25,12 +25,13 @@ public class Block {
 
   //Color mapper
   private Map<Integer, Color> colorMapper = Map.ofEntries(
+      entry(-1, Color.GREY),
       entry(0, Color.BLACK),
       entry(1, Color.GREEN),
       entry(2, Color.YELLOW),
       entry(3, Color.ORANGE),
       entry(4, Color.RED),
-      entry(5, Color.GOLD)
+      entry(5, Color.DARKGOLDENROD)
   );
 
   public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {
@@ -90,5 +91,9 @@ public class Block {
     PowerUp powerUp = new PowerUp(x, y, 20, randomPowerUpName, 100);
 
     return powerUp;
+  }
+
+  public boolean isUnbreakable() {
+    return isUnbreakable;
   }
 }
