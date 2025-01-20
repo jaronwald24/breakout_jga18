@@ -84,7 +84,7 @@ public class Block {
 
   //drop a power up
   public PowerUp dropPowerUp(int x, int y) {
-    String[] powerUpNames = {"expand", "speed"};
+    String[] powerUpNames = {"expand"};
     String randomPowerUpName = powerUpNames[(int) (Math.random() * powerUpNames.length)];
 
     PowerUp powerUp = new PowerUp(x, y, 20, randomPowerUpName, 100);

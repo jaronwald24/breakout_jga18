@@ -55,4 +55,8 @@ public class Paddle {
 
     myPaddle.setX(xPosition);
   }
+
+  public void setWidth(int width) {
+    this.width = width;
+  }
 }

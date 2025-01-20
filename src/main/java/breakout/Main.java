@@ -313,7 +313,53 @@ public class Main extends Application {
 
         double newHorizontalVelocity = relativeHitPosition * BALL_SPEED;
         startBall.setXVelocity(newHorizontalVelocity);
+    }
 
+    //handles the powerUp interacting with the paddle
+    private void powerUpPaddleInteraction(double elapsedTime) {
+        //logic created by me, but adapted from code originally written by ChatGPT
+        Iterator<PowerUp> iterator = activePowerUps.iterator();
+        while (iterator.hasNext()) {
+            PowerUp powerUp = iterator.next();
+            powerUp.fallDown(elapsedTime);
+
+            //check for intersection with the paddle
+            Shape intersection = Shape.intersect(startPaddle.getPaddle(), powerUp.getRectangle());
+            if (!intersection.getBoundsInLocal().isEmpty()) {
+                applyPowerUp(powerUp.getPowerUpName());
+                root.getChildren().remove(intersection);
+                iterator.remove();
+            }
+
+            //remove power-ups that fall off the screen
+            if (powerUp.getRectangle().getY() > SIZE) {
+                root.getChildren().remove(powerUp.getRectangle());
+                iterator.remove();
+            }
+        }
+    }
+
+    private void applyPowerUp(String powerUpName) {
+        switch (powerUpName) {
+            case "expands" -> {
+                startPaddle.setWidth((int) startPaddle.getPaddle().getWidth() * 2);
+            }
+            //add more if needed
+        }
+
+        //reset after the duraction expires
+        Timeline timeout = new Timeline(new KeyFrame(Duration.millis(200), e -> resetPowerUpEffect(powerUpName)));
+        timeout.setCycleCount(1);
+        timeout.play();
+    }
+
+    private void resetPowerUpEffect(String powerUpName) {
+        switch (powerUpName) {
+            case "expands" -> {
+                startPaddle.setWidth(PADDLE_WIDTH);
+            }
+            //add more if needed
+        }
     }
 
 
