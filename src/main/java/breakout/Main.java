@@ -30,33 +30,33 @@ import javafx.util.Duration;
 public class Main extends Application {
 
     // useful names for constant values used
-    public static final String TITLE = "Example JavaFX Animation";
-    public static final Color DUKE_BLUE = new Color(0, 0.188, 0.529, 1);
-    public static final int SIZE = 400;
+    private static final String TITLE = "Example JavaFX Animation";
+    private static final Color DUKE_BLUE = new Color(0, 0.188, 0.529, 1);
+    private static final int SIZE = 400;
 
-    public static final int FRAMES_PER_SECOND = 60;
-    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final Paint BACKGROUND = Color.AZURE;
+    private static final int FRAMES_PER_SECOND = 60;
+    private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    private static final Paint BACKGROUND = Color.AZURE;
 
     //ball constants
-    public static final int BALL_SIZE = 20;
-    public static final int BALL_SPEED = 200;
+    private static final int BALL_SIZE = 20;
+    private static final int BALL_SPEED = 200;
 
     //paddle constants
-    public static final int PADDLE_WIDTH = 100;
-    public static final int PADDLE_HEIGHT = 10;
-    public static final int PADDLE_SPEED = 40;
-    public static final int PADDLE_X_POS = 100;
-    public static final int PADDLE_Y_POS = 350;
+    private static final int PADDLE_WIDTH = 100;
+    private static final int PADDLE_HEIGHT = 10;
+    private static final int PADDLE_SPEED = 40;
+    private static final int PADDLE_X_POS = 100;
+    private static final int PADDLE_Y_POS = 350;
 
     //block constants
-    public static final int BLOCK_X_SPACING = 10;
-    public static final int BLOCK_Y_SPACING = 30;
-    public static final int TOP_ROW_SPACING = 30;
-    public static final int NUMBER_OF_ROWS = 2;
+    private static final int BLOCK_X_SPACING = 10;
+    private static final int BLOCK_Y_SPACING = 30;
+    private static final int TOP_ROW_SPACING = 30;
+    private static final int NUMBER_OF_ROWS = 2;
 
     //game settings constants
-    public static int REMAINING_LIVES = 3;
+    private static int REMAINING_LIVES = 3;
 
 
     // This scene contains the various shapes and has methods that act upon them

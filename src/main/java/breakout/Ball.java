@@ -5,17 +5,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-
-import static breakout.Main.SIZE;
+import javax.management.monitor.GaugeMonitorMBean;
 
 
 public class Ball {
+  private static final int GAME_SIZE = 400;
   private int size;
   private Circle myBall;
 
 
-  private
-  static final int SLOW_BALL_SPEED = 200;
+  private static final int SLOW_BALL_SPEED = 200;
   public static final int FAST__BALL_SPEED = 250;
 
   //this code was taken from the example code for bouncer lab
@@ -31,8 +30,8 @@ public class Ball {
     myBall.setFill(Color.WHITE);
 
     //the logic on lines 33-34 were adapted from the bouncer lab
-    myBall.setCenterX(getRandomInRange(size, SIZE - size));
-    myBall.setCenterY(getRandomInRange(size, SIZE - size));
+    myBall.setCenterX(getRandomInRange(size, GAME_SIZE - size));
+    myBall.setCenterY(getRandomInRange(size, GAME_SIZE - size));
 
     velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }
@@ -50,7 +49,7 @@ public class Ball {
 
   //handles the ball bouncing off the walls, returns whether or not you lost a life
   public boolean wallBounces() {
-    if (myBall.getCenterX() - myBall.getRadius() <= 0 || myBall.getCenterX() + myBall.getRadius() >= SIZE) {
+    if (myBall.getCenterX() - myBall.getRadius() <= 0 || myBall.getCenterX() + myBall.getRadius() >= GAME_SIZE) {
       velocity = new Point2D(-velocity.getX(), velocity.getY());
     }
 
@@ -58,7 +57,7 @@ public class Ball {
       YChangeBounce();
     }
 
-    if (myBall.getCenterY() + myBall.getRadius() >= SIZE) {
+    if (myBall.getCenterY() + myBall.getRadius() >= GAME_SIZE) {
       resetBall();
       return true;
     }
@@ -82,8 +81,8 @@ public class Ball {
 
   //Resets the location of the ball and sets it moving upward
   private void resetBall() {
-    myBall.setCenterX(getRandomInRange(size, SIZE - size));
-    myBall.setCenterY(getRandomInRange(size, SIZE - size + 100));
+    myBall.setCenterX(getRandomInRange(size, GAME_SIZE - size));
+    myBall.setCenterY(getRandomInRange(size, GAME_SIZE - size + 100));
 
     velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }

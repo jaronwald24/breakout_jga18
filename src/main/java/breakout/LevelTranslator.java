@@ -1,8 +1,5 @@
 package breakout;
 
-import static breakout.Main.BLOCK_X_SPACING;
-import static breakout.Main.BLOCK_Y_SPACING;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
@@ -12,6 +9,9 @@ import javafx.scene.Group;
 
 public class LevelTranslator {
   private ArrayList<Block> createdBlocks;
+  private static final int BLOCK_X_SPACING = 10;
+  private static final int BLOCK_Y_SPACING = 30;
+  private static final int SIZE = 400;
 
   public LevelTranslator() {
     createdBlocks = new ArrayList<>();
@@ -41,7 +41,7 @@ public class LevelTranslator {
 
     //logic adapted from Main for dynamic block spacing
     double totalRowWidth = totalCols * Block.width + (totalCols - 1) * BLOCK_X_SPACING;
-    double startX = (Main.SIZE - totalRowWidth) / 2;
+    double startX = (SIZE - totalRowWidth) / 2;
 
     // loop through each row
     while (scanner.hasNextLine()) {

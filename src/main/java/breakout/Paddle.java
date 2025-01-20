@@ -10,6 +10,7 @@ public class Paddle {
   private double xPosition;
   private double yPosition;
   private Rectangle myPaddle;
+  private static final int GAME_SIZE = 400;
 
   public Paddle(int width, int height, double xPosition, double yPosition) {
     this.width = width;
@@ -32,8 +33,8 @@ public class Paddle {
     if (xPosition < 0) {
       xPosition = 0;
     }
-    else if (xPosition > Main.SIZE - width) {
-      xPosition = Main.SIZE - width;
+    else if (xPosition > GAME_SIZE - width) {
+      xPosition = GAME_SIZE - width;
     }
     myPaddle.setX(xPosition);
   }
