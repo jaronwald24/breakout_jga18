@@ -30,7 +30,7 @@ public class Block {
       entry(2, Color.YELLOW),
       entry(3, Color.ORANGE),
       entry(4, Color.RED),
-      entry(5, Color.DARKRED)
+      entry(5, Color.GOLD)
   );
 
   public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {

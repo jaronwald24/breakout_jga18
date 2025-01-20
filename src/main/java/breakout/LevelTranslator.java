@@ -62,6 +62,8 @@ public class LevelTranslator {
         Block newBlock;
         if (block.equals("-1")) {
           newBlock = new Block(xPosition, yPosition, false, true, -1);
+        } else if (block.equals("5")) {
+          newBlock = new Block(xPosition, yPosition, true, false, 1);
         } else {
           newBlock = new Block(xPosition, yPosition, false, false, Integer.parseInt(block));
         }
