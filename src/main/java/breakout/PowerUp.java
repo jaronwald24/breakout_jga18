@@ -8,7 +8,7 @@ public class PowerUp {
   private String powerUpName;
   private double fallSpeed;
 
-  public PowerUp(int x, int y, int size, Rectangle shape, String powerUpName, double fallSpeed) {
+  public PowerUp(int x, int y, int size, String powerUpName, double fallSpeed) {
     this.shape = new Rectangle(x, y, size, size);
     this.shape.setFill(Color.MAGENTA);
     this.powerUpName = powerUpName;

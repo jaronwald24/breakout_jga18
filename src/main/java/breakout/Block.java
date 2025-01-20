@@ -81,4 +81,14 @@ public class Block {
       myBlock.setFill(Color.GOLD);
     }
   }
+
+  //drop a power up
+  public PowerUp dropPowerUp(int x, int y) {
+    String[] powerUpNames = {"expand", "speed"};
+    String randomPowerUpName = powerUpNames[(int) (Math.random() * powerUpNames.length)];
+
+    PowerUp powerUp = new PowerUp(x, y, 20, randomPowerUpName, 100);
+
+    return powerUp;
+  }
 }

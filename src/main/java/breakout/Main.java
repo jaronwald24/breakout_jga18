@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -72,6 +73,8 @@ public class Main extends Application {
     private Text livesText;
     private Text scoreText;
     private Text levelText;
+
+    private ArrayList<PowerUp> activePowerUps;
 
     private Group root;
     /**
@@ -160,6 +163,15 @@ public class Main extends Application {
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 startBall.YChangeBounce();
                 incrementScore(block);
+
+                // handle powerups
+                if (block.isPowerUpBlock()) {
+                    int x = (int) block.getBlock().getX();
+                    int y = (int) block.getBlock().getY();
+                    PowerUp powerUp = block.dropPowerUp(x, y);
+                    activePowerUps.add(powerUp);
+                    root.getChildren().add(powerUp.getRectangle());
+                }
                 if (block.hit()) {
                     iterator.remove();
                     root.getChildren().remove(block.getBlock());
