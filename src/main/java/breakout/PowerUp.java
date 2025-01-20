@@ -16,7 +16,7 @@ public class PowerUp {
   }
 
   public void fallDown(double elapsedTime) {
-    shape.setY(shape.getY() + fallSpeed. * elapsedTime);
+    shape.setY(shape.getY() + fallSpeed * elapsedTime);
   }
 
   //returns the rectnagle object
