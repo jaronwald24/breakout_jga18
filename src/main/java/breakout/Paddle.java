@@ -58,5 +58,6 @@ public class Paddle {
 
   public void setWidth(int width) {
     this.width = width;
+    myPaddle.setWidth(width);
   }
 }

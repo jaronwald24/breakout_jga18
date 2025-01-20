@@ -341,15 +341,16 @@ public class Main extends Application {
     }
 
     private void applyPowerUp(String powerUpName) {
+        System.out.println("Applying power up " + powerUpName + startPaddle.getPaddle().getWidth());
         switch (powerUpName) {
             case "expands" -> {
-                startPaddle.setWidth((int) startPaddle.getPaddle().getWidth() * 2);
+                startPaddle.setWidth((int) (startPaddle.getPaddle().getWidth() * 1.5));
             }
             //add more if needed
         }
-
+        System.out.println(startPaddle.getPaddle().getWidth());
         //reset after the duraction expires
-        Timeline timeout = new Timeline(new KeyFrame(Duration.millis(200), e -> resetPowerUpEffect(powerUpName)));
+        Timeline timeout = new Timeline(new KeyFrame(Duration.millis(10000), e -> resetPowerUpEffect(powerUpName)));
         timeout.setCycleCount(1);
         timeout.play();
     }
