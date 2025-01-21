@@ -64,6 +64,7 @@ public class Main extends Application {
     // This scene contains the various shapes and has methods that act upon them
     private Scene startScene;
 
+    //initialization of classes
     private Timeline animation;
     private Ball startBall;
     private Paddle startPaddle;
@@ -71,9 +72,18 @@ public class Main extends Application {
     private GameSettings gameSettings;
     private LevelTranslator levelTranslator;
 
+    //various Texts displayed
     private Text livesText;
     private Text scoreText;
     private Text levelText;
+
+    // prev variables for powerupsp
+    private double prevXVelocity;
+    private double prevYVelocity;
+    private double originalSpeed;
+    private int prevBallSize;
+
+
 
     private ArrayList<PowerUp> activePowerUps = new ArrayList<>();
 
@@ -363,13 +373,20 @@ public class Main extends Application {
             }
             //ball speeds increases
             case "speedUp" -> {
+                double curXVelocity = startBall.getVelocity().getX();
+                double curYVelocity = startBall.getVelocity().getY();
+                originalSpeed = Math.sqrt(Math.pow(curXVelocity, 2) + Math.pow(curYVelocity, 2));
                 startBall.changeVelocity(startBall.getVelocity().getX() * 2, startBall.getVelocity().getY() * 2);
+            }
+            case "balLGrow" -> {
+                prevBallSize = startBall.getSize();
+                startBall.setBallSize(startBall.getSize() * 1.5);
             }
             //add more if needed
         }
         System.out.println(startPaddle.getPaddle().getWidth());
         //reset after the duraction expires
-        Timeline timeout = new Timeline(new KeyFrame(Duration.millis(10000), e -> resetPowerUpEffect(powerUpName)));
+        Timeline timeout = new Timeline(new KeyFrame(Duration.millis(7000), e -> resetPowerUpEffect(powerUpName)));
         timeout.setCycleCount(1);
         timeout.play();
     }
@@ -380,7 +397,10 @@ public class Main extends Application {
                 startPaddle.setWidth(PADDLE_WIDTH);
             }
             case "speedUp" -> {
-                startBall.changeVelocity(startBall.getVelocity().getX(), startBall.getVelocity().getY());
+                resetSpeedUp();
+            }
+            case "balLGrow" -> {
+                startBall.setBallSize(prevBallSize);
             }
             //add more if needed
         }
@@ -394,6 +414,16 @@ public class Main extends Application {
             }
         }
         return true;
+    }
+
+    private void resetSpeedUp() {
+        double currentXVelocity = startBall.getVelocity().getX();
+        double currentYVelocity = startBall.getVelocity().getY();
+
+        //get speed
+        double currentSpeed = Math.sqrt(Math.pow(currentXVelocity, 2) + Math.pow(currentYVelocity, 2));
+
+        startBall.changeVelocity((currentXVelocity / currentSpeed) * originalSpeed, (currentYVelocity / currentSpeed) * originalSpeed);
     }
 
 

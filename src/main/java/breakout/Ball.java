@@ -41,6 +41,17 @@ public class Ball {
     return myBall;
   }
 
+  // set a new size for the ball
+  public void setBallSize(double size) {
+    this.size = (int) size;
+    myBall.setRadius(size/2);
+  }
+
+  //return ball size
+  public int getSize() {
+    return size;
+  }
+
   //handles the movement of the ball at each moment
   public void moveBall(double elapsedTime) {
     myBall.setCenterX(myBall.getCenterX() + velocity.getX() * elapsedTime);
