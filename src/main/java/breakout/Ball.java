@@ -66,19 +66,12 @@ public class Ball {
     return false;
   }
 
-  //handle change in vertical direction on a Bounce
-  public void YChangeBounce() {
-      velocity = new Point2D(velocity.getX(), -velocity.getY());
-  }
-
-  public void setXVelocity(double xVelocity) {
-    velocity = new Point2D(xVelocity, velocity.getY());
-  }
-
+  //handles all velocity change
   public void changeVelocity(double xVelocity, double yVelocity) {
     velocity = new Point2D(xVelocity, yVelocity);
   }
 
+  // velocity getter
   public Point2D getVelocity() {
     return velocity;
   }

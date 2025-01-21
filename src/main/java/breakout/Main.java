@@ -357,8 +357,13 @@ public class Main extends Application {
     private void applyPowerUp(String powerUpName) {
         System.out.println("Applying power up " + powerUpName + startPaddle.getPaddle().getWidth());
         switch (powerUpName) {
+            //paddle expansion
             case "expands" -> {
                 startPaddle.setWidth((int) (startPaddle.getPaddle().getWidth() * 1.5));
+            }
+            //ball speeds increases
+            case "speedUp" -> {
+                startBall.changeVelocity(startBall.getVelocity().getX() * 2, startBall.getVelocity().getY() * 2);
             }
             //add more if needed
         }
@@ -373,6 +378,9 @@ public class Main extends Application {
         switch (powerUpName) {
             case "expands" -> {
                 startPaddle.setWidth(PADDLE_WIDTH);
+            }
+            case "speedUp" -> {
+                startBall.changeVelocity(startBall.getVelocity().getX(), startBall.getVelocity().getY());
             }
             //add more if needed
         }
