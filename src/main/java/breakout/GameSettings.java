@@ -21,7 +21,6 @@ public class GameSettings {
 
   //get user score
   public int getScore() {
-    System.out.println(score);
     return score;
   }
 

@@ -42,7 +42,7 @@ public class Main extends Application {
 
     //ball constants
     private static final int BALL_SIZE = 20;
-    private static final int BALL_SPEED = 200;
+    private static final int BALL_SPEED = 250;
 
     //paddle constants
     private static final int PADDLE_WIDTH = 100;
@@ -78,10 +78,8 @@ public class Main extends Application {
     private Text levelText;
 
     // prev variables for powerupsp
-    private double prevXVelocity;
-    private double prevYVelocity;
     private double originalSpeed;
-    private int prevBallSize;
+    private double prevBallSize;
 
 
 
@@ -365,7 +363,7 @@ public class Main extends Application {
     }
 
     private void applyPowerUp(String powerUpName) {
-        System.out.println("Applying power up " + powerUpName + startPaddle.getPaddle().getWidth());
+        System.out.println("Applying power up: " + powerUpName + startBall.getSize());
         switch (powerUpName) {
             //paddle expansion
             case "expands" -> {
@@ -378,13 +376,13 @@ public class Main extends Application {
                 originalSpeed = Math.sqrt(Math.pow(curXVelocity, 2) + Math.pow(curYVelocity, 2));
                 startBall.changeVelocity(startBall.getVelocity().getX() * 2, startBall.getVelocity().getY() * 2);
             }
-            case "balLGrow" -> {
+            case "ballGrow" -> {
                 prevBallSize = startBall.getSize();
-                startBall.setBallSize(startBall.getSize() * 1.5);
+                startBall.setBallSize(prevBallSize * 2);
             }
             //add more if needed
         }
-        System.out.println(startPaddle.getPaddle().getWidth());
+        System.out.println(prevBallSize + " " + startBall.getSize());
         //reset after the duraction expires
         Timeline timeout = new Timeline(new KeyFrame(Duration.millis(7000), e -> resetPowerUpEffect(powerUpName)));
         timeout.setCycleCount(1);
@@ -399,7 +397,7 @@ public class Main extends Application {
             case "speedUp" -> {
                 resetSpeedUp();
             }
-            case "balLGrow" -> {
+            case "ballGrow" -> {
                 startBall.setBallSize(prevBallSize);
             }
             //add more if needed

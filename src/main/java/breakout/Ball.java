@@ -14,8 +14,7 @@ public class Ball {
   private Circle myBall;
 
 
-  private static final int SLOW_BALL_SPEED = 200;
-  public static final int FAST__BALL_SPEED = 250;
+  private static final int SLOW_BALL_SPEED = 250;
 
   //this code was taken from the example code for bouncer lab
   // share one "dice" among all blocks (improves overall randomness of game)
@@ -25,6 +24,7 @@ public class Ball {
 
 
   public Ball(int size) {
+    //size = diameter
     this.size = size;
     myBall = new Circle(size/2);
     myBall.setFill(Color.WHITE);
@@ -48,7 +48,7 @@ public class Ball {
   }
 
   //return ball size
-  public int getSize() {
+  public double getSize() {
     return size;
   }
 
