@@ -7,6 +7,7 @@ import java.util.Objects;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -150,7 +151,8 @@ public class Main extends Application {
         Shape intersection = Shape.intersect(startPaddle.getPaddle(), startBall.getBall());
         if (!intersection.getBoundsInLocal().isEmpty()) {
             handlePositionalBounce();
-            startBall.YChangeBounce();
+            Point2D curVelocity = startBall.getVelocity();
+            startBall.changeVelocity(curVelocity.getX(), -curVelocity.getY());
         }
     }
 
@@ -161,7 +163,8 @@ public class Main extends Application {
             Block block = iterator.next();
             Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
             if (!intersection.getBoundsInLocal().isEmpty()) {
-                startBall.YChangeBounce();
+                Point2D curVelocity = startBall.getVelocity();
+                startBall.changeVelocity(curVelocity.getX(), -curVelocity.getY());
                 if (block.isUnbreakable()) {
                     continue;
                 }
@@ -322,7 +325,9 @@ public class Main extends Application {
         double relativeHitPosition = (horizontalBallPosition - horizontalPaddlePosition) / paddleWidth * 2 - 1;
 
         double newHorizontalVelocity = relativeHitPosition * BALL_SPEED;
-        startBall.setXVelocity(newHorizontalVelocity);
+
+        Point2D curVelocity = startBall.getVelocity();
+        startBall.changeVelocity(newHorizontalVelocity, curVelocity.getY());
     }
 
     //handles the powerUp interacting with the paddle

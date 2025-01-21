@@ -54,7 +54,8 @@ public class Ball {
     }
 
     if (myBall.getCenterY() - myBall.getRadius() <= 0 ) {
-      YChangeBounce();
+      Point2D curVelocity = getVelocity();
+      changeVelocity(curVelocity.getX(), -curVelocity.getY());
     }
 
     if (myBall.getCenterY() + myBall.getRadius() >= GAME_SIZE) {
@@ -72,6 +73,14 @@ public class Ball {
 
   public void setXVelocity(double xVelocity) {
     velocity = new Point2D(xVelocity, velocity.getY());
+  }
+
+  public void changeVelocity(double xVelocity, double yVelocity) {
+    velocity = new Point2D(xVelocity, yVelocity);
+  }
+
+  public Point2D getVelocity() {
+    return velocity;
   }
 
   //gets a random, non zero value in between min and max
