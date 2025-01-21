@@ -11,10 +11,10 @@ public class Paddle {
   private double xPosition;
   private double yPosition;
   private Rectangle myPaddle;
-  private static final int GAME_SIZE = 400;
+  private static final int GAME_SIZE = 600;
 
   private static final int START_PADDLE_X_POS = 150;
-  private static final int START_PADDLE_Y_POS = 350;
+  private static final int START_PADDLE_Y_POS = 550;
 
   public Paddle(int width, int height, double xPosition, double yPosition) {
     this.width = width;

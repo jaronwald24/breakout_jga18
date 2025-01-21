@@ -32,7 +32,7 @@ public class Main extends Application {
     // useful names for constant values used
     private static final String TITLE = "Example JavaFX Animation";
     private static final Color DUKE_BLUE = new Color(0, 0.188, 0.529, 1);
-    private static final int SIZE = 400;
+    private static final int SIZE = 600;
 
     private static final int FRAMES_PER_SECOND = 60;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -40,20 +40,17 @@ public class Main extends Application {
 
     //ball constants
     private static final int BALL_SIZE = 20;
-    private static final int BALL_SPEED = 250;
+    private static final int BALL_SPEED = 350;
 
     //paddle constants
     private static final int PADDLE_WIDTH = 100;
     private static final int PADDLE_HEIGHT = 10;
     private static final int PADDLE_SPEED = 40;
     private static final int PADDLE_X_POS = 150;
-    private static final int PADDLE_Y_POS = 350;
+    private static final int PADDLE_Y_POS = 550;
 
     //block constants
-    private static final int BLOCK_X_SPACING = 10;
-    private static final int BLOCK_Y_SPACING = 30;
     private static final int TOP_ROW_SPACING = 30;
-    private static final int NUMBER_OF_ROWS = 2;
 
     //game settings constants
     private static int REMAINING_LIVES = 3;

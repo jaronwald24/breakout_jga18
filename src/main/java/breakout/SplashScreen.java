@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class SplashScreen {
-  private static final int SIZE = 400;
+  private static final int SIZE = 600;
 
   /**
    * @param title - the title text for the new screen
@@ -26,8 +26,6 @@ public class SplashScreen {
     Scene introScene = new Scene(root, SIZE, SIZE, Color.BLACK);
 
     return introScene;
-
-
   }
 
   //creates, sets, and places text

@@ -10,8 +10,8 @@ import javafx.scene.Group;
 public class LevelTranslator {
   private ArrayList<Block> createdBlocks;
   private static final int BLOCK_X_SPACING = 10;
-  private static final int BLOCK_Y_SPACING = 30;
-  private static final int SIZE = 400;
+  private static final int BLOCK_Y_SPACING = 50;
+  private static final int SIZE = 600;
 
   public LevelTranslator() {
     createdBlocks = new ArrayList<>();
@@ -64,7 +64,7 @@ public class LevelTranslator {
 
         // get the block position
         double xPosition = startX + col * (Block.width + BLOCK_X_SPACING);
-        double yPosition = row * (Block.height + BLOCK_Y_SPACING);
+        double yPosition = BLOCK_Y_SPACING + row * (Block.height + BLOCK_Y_SPACING);
 
         Block newBlock;
         if (block.equals("-1")) {

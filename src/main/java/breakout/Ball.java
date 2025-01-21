@@ -9,12 +9,12 @@ import javax.management.monitor.GaugeMonitorMBean;
 
 
 public class Ball {
-  private static final int GAME_SIZE = 400;
+  private static final int GAME_SIZE = 600;
   private int size;
   private Circle myBall;
 
 
-  private static final int SLOW_BALL_SPEED = 250;
+  private static final int SLOW_BALL_SPEED = 350;
 
   //this code was taken from the example code for bouncer lab
   // share one "dice" among all blocks (improves overall randomness of game)
