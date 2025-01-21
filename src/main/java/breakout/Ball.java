@@ -10,6 +10,8 @@ import javax.management.monitor.GaugeMonitorMBean;
 
 public class Ball {
   private static final int GAME_SIZE = 600;
+  private static final int PADDLE_Y_POS = 550;
+
   private int size;
   private Circle myBall;
 
@@ -117,7 +119,7 @@ public class Ball {
   //Resets the location of the ball and sets it moving upward
   public void resetBall() {
     myBall.setCenterX(getRandomInRange(size, GAME_SIZE - size));
-    myBall.setCenterY(getRandomInRange(size, GAME_SIZE - size + 100));
+    myBall.setCenterY(getRandomInRange(PADDLE_Y_POS - 150, PADDLE_Y_POS - size - 10));
 
     velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }

@@ -300,6 +300,7 @@ public class Main extends Application {
         levelText.setText("Current level: " + levelNumber);
 
         blocks = setUpBlocks();
+        startBall.resetBall();
 
         //add blocks to root
         for (Block block : blocks) {
