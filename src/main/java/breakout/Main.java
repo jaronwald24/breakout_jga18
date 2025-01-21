@@ -304,23 +304,23 @@ public class Main extends Application {
         animation.stop();
         root.getChildren().removeAll(root.getChildren());
         String message;
+        Color color = Color.BLACK;
 
         if (winner) {
             message = "Game Over, you won!";
+            color = Color.GREEN;
         } else {
             message = "Game Over, you lost!";
+            color = Color.RED;
         }
 
-        Text endText = createText(message, 10, TOP_ROW_SPACING / 2, Color.BLACK, Font.font("Arial", 40));
-        Text instructions = createText("Press enter to play again.", 10, TOP_ROW_SPACING / 3.0, Color.BLACK, Font.font("Arial", 16));
-        //lines 260-263 were AI generated to assist with spacing
+        Text endText = createText(message, SIZE/ 4.5, SIZE / 3.0, color, Font.font("Arial", 40));
+        Text instructions = createText("Press enter to play again.", SIZE/2.8, SIZE / 2.5, color, Font.font("Arial", 16));
 
-        // Create a VBox to hold all the elements and center them
-        VBox layout = new VBox(20); // Spacing of 20 between elements
-        layout.setAlignment(Pos.CENTER); // Center elements horizontally and vertically
-        layout.getChildren().addAll(endText, livesText, scoreText, instructions);
+        livesText.setFill(color);
+        scoreText.setFill(color);
 
-        root.getChildren().add(layout);
+        root.getChildren().addAll(endText, livesText, scoreText, instructions);
 
         startScene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {

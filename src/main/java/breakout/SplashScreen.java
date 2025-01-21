@@ -19,11 +19,13 @@ public class SplashScreen {
 
     Text titleText = createText(title, SIZE / 2.5, SIZE/3.5, Color.WHITE, new Font(18));
     Text descriptionText = createText(description, SIZE / 4.0, SIZE/3.0, Color.WHITE, new Font(18));
-    Text instructions = createText("Press enter to begin!",SIZE / 4.0, SIZE/2.5, Color.WHITE, new Font(18));
+    Text instructions = createText("Press enter to begin!",SIZE / 3.0, SIZE/2.5, Color.WHITE, new Font(18));
 
     root.getChildren().addAll(titleText, descriptionText, instructions);
 
     Scene introScene = new Scene(root, SIZE, SIZE, Color.BLACK);
+
+
 
     return introScene;
   }
