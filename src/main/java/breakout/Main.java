@@ -152,6 +152,10 @@ public class Main extends Application {
         switch(code) {
             case RIGHT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() + PADDLE_SPEED, gameSettings.getLevel());
             case LEFT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() - PADDLE_SPEED, gameSettings.getLevel());
+            case L -> {
+                gameSettings.increaseLives();
+                livesText.setText("Lives Remaining: " + gameSettings.getLives());
+            }
         }
     }
 

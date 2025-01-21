@@ -44,6 +44,10 @@ public class GameSettings {
     return lives > 0;
   }
 
+  public void increaseLives() {
+    lives++;
+  }
+
   //advance to the next level and returns whether or not you win
   public boolean advanceToNextLevel() {
     int currentLevel = Integer.parseInt(level.substring(4, 6));
