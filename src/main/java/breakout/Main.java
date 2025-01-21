@@ -179,6 +179,12 @@ public class Main extends Application {
                 gameSettings.cheatIncreaseScore();
                 scoreText.setText("Score: " + gameSettings.getScore());
             }
+            case I -> {
+                startBall.setBallSize(startBall.getSize() * 2);
+            }
+            case O -> {
+                startBall.setBallSize(BALL_SIZE);
+            }
         }
     }
 
