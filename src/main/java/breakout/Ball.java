@@ -93,7 +93,7 @@ public class Ball {
   }
 
   //Resets the location of the ball and sets it moving upward
-  private void resetBall() {
+  public void resetBall() {
     myBall.setCenterX(getRandomInRange(size, GAME_SIZE - size));
     myBall.setCenterY(getRandomInRange(size, GAME_SIZE - size + 100));
 

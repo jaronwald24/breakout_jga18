@@ -48,7 +48,7 @@ public class Main extends Application {
     private static final int PADDLE_WIDTH = 100;
     private static final int PADDLE_HEIGHT = 10;
     private static final int PADDLE_SPEED = 40;
-    private static final int PADDLE_X_POS = 100;
+    private static final int PADDLE_X_POS = 150;
     private static final int PADDLE_Y_POS = 350;
 
     //block constants
@@ -155,6 +155,10 @@ public class Main extends Application {
             case L -> {
                 gameSettings.increaseLives();
                 livesText.setText("Lives Remaining: " + gameSettings.getLives());
+            }
+            case R -> {
+                startBall.resetBall();
+                startPaddle.resetPaddlePosition();
             }
         }
     }

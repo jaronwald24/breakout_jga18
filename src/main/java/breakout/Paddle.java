@@ -13,6 +13,9 @@ public class Paddle {
   private Rectangle myPaddle;
   private static final int GAME_SIZE = 400;
 
+  private static final int START_PADDLE_X_POS = 150;
+  private static final int START_PADDLE_Y_POS = 350;
+
   public Paddle(int width, int height, double xPosition, double yPosition) {
     this.width = width;
     this.height = height;
@@ -30,6 +33,7 @@ public class Paddle {
     return myPaddle;
   }
 
+  //sets the boundaries for the paddle, depending on the level
   public void setPaddlePosition(double xPosition, String level) {
     double leftBoundary;
     double rightBoundary;
@@ -56,6 +60,13 @@ public class Paddle {
     myPaddle.setX(xPosition);
   }
 
+  //resets paddle position
+  public void resetPaddlePosition() {
+    myPaddle.setX(START_PADDLE_X_POS);
+    myPaddle.setY(START_PADDLE_Y_POS);
+  }
+
+  //sets new width of paddle
   public void setWidth(int width) {
     this.width = width;
     myPaddle.setWidth(width);
