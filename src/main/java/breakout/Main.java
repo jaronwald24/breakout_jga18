@@ -200,7 +200,9 @@ public class Main extends Application {
             Shape intersection = Shape.intersect(block.getBlock(), startBall.getBall());
             if (!intersection.getBoundsInLocal().isEmpty()) {
                 Point2D curVelocity = startBall.getVelocity();
-                startBall.changeVelocity(curVelocity.getX(), -curVelocity.getY());
+                if (!horizontalBlockIntersection(block)) {
+                    startBall.changeVelocity(curVelocity.getX(), -curVelocity.getY());
+                }
                 if (block.isUnbreakable()) {
                     continue;
                 }
@@ -229,6 +231,20 @@ public class Main extends Application {
                endGame(true);
             }
         }
+    }
+
+    // handles the case where it hits the block's horizontal
+    private boolean horizontalBlockIntersection(Block block) {
+        if (startBall.getBall().getCenterX() <= block.getBlock().getX()) {
+            // Left collision
+            startBall.changeVelocity(-Math.abs(startBall.getVelocity().getX()), startBall.getVelocity().getY());
+            return true;
+        } else if (startBall.getBall().getCenterX() >= block.getBlock().getX() + block.getBlock().getWidth()) {
+            // Right collision
+            startBall.changeVelocity(Math.abs(startBall.getVelocity().getX()), startBall.getVelocity().getY());
+            return true;
+        }
+        return false;
     }
 
     // the following code has been adapted from the bounce lab
