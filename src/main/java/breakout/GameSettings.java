@@ -14,7 +14,7 @@ public class GameSettings {
   }
 
   //increase score when block is hit
-  public void incrementScore(Block block) {
+  public void incrementScore() {
     //handle power ups here
     score++;
   }
@@ -37,7 +37,11 @@ public class GameSettings {
   public String getLevel() {
     return level;
   }
-  //setter for the level
+
+  /**
+   *
+   * @param level - the new level being set
+   */
   public void setLevel(String level) {
     this.level = level;
   }
@@ -52,7 +56,11 @@ public class GameSettings {
     lives++;
   }
 
-  //advance to the next level and returns whether or not you win
+
+  /**
+   * Advance to the next level and returns whether or not you win
+   * @return - whether or not there exists a next level
+   */
   public boolean advanceToNextLevel() {
     int currentLevel = Integer.parseInt(level.substring(4, 6));
     String nextLevel = String.format("lvl_%02d.txt", currentLevel + 1);

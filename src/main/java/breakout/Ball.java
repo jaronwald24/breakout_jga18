@@ -36,29 +36,44 @@ public class Ball {
     velocity = new Point2D(SLOW_BALL_SPEED, -SLOW_BALL_SPEED);
   }
 
-  //returns the Circle object of the ball
+  /**
+   *
+   * @return the Circle object of the ball
+   */
   public Circle getBall() {
     return myBall;
   }
 
-  // set a new size for the ball
+  /**
+   *
+   * @param size - the new size that the ball will become
+   */
   public void setBallSize(double size) {
     this.size = (int) size;
     myBall.setRadius(size/2);
   }
 
-  //return ball size
+  /**
+   *
+   * @return - the size of the ball
+   */
   public double getSize() {
     return size;
   }
 
-  //handles the movement of the ball at each moment
+  /**
+   *
+   * @param elapsedTime - the time for each step for the animation
+   */
   public void moveBall(double elapsedTime) {
     myBall.setCenterX(myBall.getCenterX() + velocity.getX() * elapsedTime);
     myBall.setCenterY(myBall.getCenterY() + velocity.getY() * elapsedTime);
   }
 
-  //handles the ball bouncing off the walls, returns whether or not you lost a life
+  /**
+   *
+   * @return - a boolean representing whether or not a life is lost
+   */
   public boolean wallBounces() {
     if (myBall.getCenterX() - myBall.getRadius() <= 0 || myBall.getCenterX() + myBall.getRadius() >= GAME_SIZE) {
       velocity = new Point2D(-velocity.getX(), velocity.getY());
@@ -77,12 +92,19 @@ public class Ball {
     return false;
   }
 
-  //handles all velocity change
+  /**
+   *
+   * @param xVelocity - new velocity in x direction
+   * @param yVelocity - new velocity in y direction
+   */
   public void changeVelocity(double xVelocity, double yVelocity) {
     velocity = new Point2D(xVelocity, yVelocity);
   }
 
-  // velocity getter
+  /**
+   *
+   * @return - the velocity vector
+   */
   public Point2D getVelocity() {
     return velocity;
   }

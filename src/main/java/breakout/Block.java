@@ -50,18 +50,28 @@ public class Block {
     updateBlockColor();
   }
 
-  //returns the rectangle object
+  /**
+   *
+   * @return - the Rectangle object of the ball
+   */
   public Rectangle getBlock() {
     return myBlock;
   }
 
 
-  // this checks if a block has been destroyed
+  /**
+   *
+   * @return - boolean represneting whether or no a block is destroyed
+   */
   public boolean isDestroyed() {
     return health <= 0;
   }
 
-  //this handles whenever a block is hit by the ball
+
+  /**
+   * This handles whenever a block is hit by the ball
+   * @return - whether or not a block has health 0
+   */
   public boolean hit() {
     health--;
     updateBlockColor();
@@ -83,7 +93,12 @@ public class Block {
     }
   }
 
-  //drop a power up
+  /**
+   *
+   * @param x - horizontal position of the powerUp
+   * @param y - vertical position of the powerUp
+   * @return - returns the power up of class PowerUp
+   */
   public PowerUp dropPowerUp(int x, int y) {
     String[] powerUpNames = {"ballGrow"};
     String randomPowerUpName = powerUpNames[(int) (Math.random() * powerUpNames.length)];
@@ -93,6 +108,10 @@ public class Block {
     return powerUp;
   }
 
+  /**
+   *
+   * @return - whether or not a block is unbreakable
+   */
   public boolean isUnbreakable() {
     return isUnbreakable;
   }

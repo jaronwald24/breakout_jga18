@@ -19,7 +19,10 @@ public class PowerUp {
     shape.setY(shape.getY() + fallSpeed * elapsedTime);
   }
 
-  //returns the rectangle object
+  /**
+   * Getter for the Rectangle object
+   * @return - the Rectangle object
+   */
   public Rectangle getRectangle() {
     return shape;
   }

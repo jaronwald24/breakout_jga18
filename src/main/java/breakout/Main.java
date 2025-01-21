@@ -11,12 +11,10 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -92,7 +90,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         SplashScreen splashScreen = new SplashScreen();
-        Scene splashScene = splashScreen.createIntroScreen(stage, "Welcome", "Use the arrows to move the paddle.");
+        Scene splashScene = splashScreen.createIntroScreen("Welcome", "Use the arrows to move the paddle.");
         stage.setScene(splashScene);
         stage.show();
 
@@ -258,7 +256,7 @@ public class Main extends Application {
     }
 
     // sets the text of initial lives
-    public void setUpGameSettings() {
+    private void setUpGameSettings() {
         livesText = createText("Lives Remaining: " + gameSettings.getLives(), 10, TOP_ROW_SPACING, Color.WHITE, Font.font("Arial", 16));
         scoreText = createText("Score: " + gameSettings.getScore(), SIZE / 2.25, TOP_ROW_SPACING, Color.WHITE, Font.font("Arial", 16));
 
@@ -272,7 +270,7 @@ public class Main extends Application {
     }
 
     // sets the next level up with bricks or user wins the game
-    public boolean gameOverOrSetUpNextLevel() throws FileNotFoundException {
+    private boolean gameOverOrSetUpNextLevel() throws FileNotFoundException {
         for (Block block : blocks) {
             if (block.isUnbreakable()) {
                 root.getChildren().remove(block.getBlock());
@@ -297,7 +295,7 @@ public class Main extends Application {
         return true;
     }
 
-    public void decreaseLives() {
+    private void decreaseLives() {
         if(!gameSettings.decreaseLife()){
             endGame(false);
         }
@@ -305,7 +303,7 @@ public class Main extends Application {
     }
 
     //ends the game, clears elements
-    public void endGame(boolean winner) {
+    private void endGame(boolean winner) {
         animation.stop();
         root.getChildren().removeAll(root.getChildren());
         String message;
@@ -352,8 +350,8 @@ public class Main extends Application {
     }
 
     //increment score in game settings then display it
-    public void incrementScore(Block block) {
-        gameSettings.incrementScore(block);
+    private void incrementScore(Block block) {
+        gameSettings.incrementScore();
         scoreText.setText("Score: " + gameSettings.getScore());
     }
 

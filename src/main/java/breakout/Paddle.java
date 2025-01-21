@@ -29,11 +29,19 @@ public class Paddle {
     this.myPaddle.setY(yPosition);
   }
 
+  /**
+   *
+   * @return the Rectangle object for the paddle
+   */
   public Rectangle getPaddle() {
     return myPaddle;
   }
 
-  //sets the boundaries for the paddle, depending on the level
+  /**
+   *
+   * @param xPosition - x position of the paddle
+   * @param level - current level of the game
+   */
   public void setPaddlePosition(double xPosition, String level) {
     double leftBoundary;
     double rightBoundary;
@@ -61,11 +69,16 @@ public class Paddle {
   }
 
   //resets paddle position
+
   public void resetPaddlePosition() {
     myPaddle.setX(START_PADDLE_X_POS);
     myPaddle.setY(START_PADDLE_Y_POS);
   }
 
+  /**
+   *
+   * @param width - a width that will be set for the paddle
+   */
   //sets new width of paddle
   public void setWidth(int width) {
     this.width = width;

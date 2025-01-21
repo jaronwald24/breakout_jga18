@@ -2,16 +2,19 @@ package breakout;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class SplashScreen {
   private static final int SIZE = 400;
 
-  public Scene createIntroScreen(Stage stage, String title, String description) {
+  /**
+   * @param title - the title text for the new screen
+   * @param description - the description text for the new screen
+   * @return - returns the new Screen created for the intro screen
+   */
+  public Scene createIntroScreen(String title, String description) {
     Group root = new Group();
 
     Text titleText = createText(title, SIZE / 2.5, SIZE/3.5, Color.WHITE, new Font(18));

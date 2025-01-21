@@ -18,6 +18,13 @@ public class LevelTranslator {
   }
 
   // generates the blocks from the text file
+
+  /**
+   *
+   * @param fileName - the new filename
+   * @return - the arrayList of blocks that is created from the text files
+   * @throws FileNotFoundException
+   */
   public ArrayList<Block> generateBlocksFromFile(String fileName)
       throws FileNotFoundException {
 
