@@ -173,7 +173,12 @@ public class Main extends Application {
                 boolean nextLevelExists = gameOverOrSetUpNextLevel();
                 if (!nextLevelExists) {
                     endGame(true);
-                }            }
+                }
+            }
+            case S -> {
+                gameSettings.cheatIncreaseScore();
+                scoreText.setText("Score: " + gameSettings.getScore());
+            }
         }
     }
 

@@ -19,6 +19,10 @@ public class GameSettings {
     score++;
   }
 
+  public void cheatIncreaseScore() {
+    score += 3;
+  }
+
   //get user score
   public int getScore() {
     return score;
