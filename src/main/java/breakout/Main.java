@@ -128,7 +128,13 @@ public class Main extends Application {
 
 
         startScene = new Scene(root, SIZE, SIZE, DUKE_BLUE);
-        startScene.setOnKeyPressed(e -> handleKeyboardInput(e.getCode()));
+        startScene.setOnKeyPressed(e -> {
+          try {
+            handleKeyboardInput(e.getCode());
+          } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+          }
+        });
         stage.setScene(startScene);
 
         stage.setTitle(TITLE);
@@ -148,7 +154,7 @@ public class Main extends Application {
     }
 
     //handles the keyboard presses -- specifically for moving paddle
-    private void handleKeyboardInput(KeyCode code) {
+    private void handleKeyboardInput(KeyCode code) throws FileNotFoundException {
         switch(code) {
             case RIGHT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() + PADDLE_SPEED, gameSettings.getLevel());
             case LEFT -> startPaddle.setPaddlePosition(startPaddle.getPaddle().getX() - PADDLE_SPEED, gameSettings.getLevel());
@@ -160,6 +166,14 @@ public class Main extends Application {
                 startBall.resetBall();
                 startPaddle.resetPaddlePosition();
             }
+            case N -> {
+                for (Block block : blocks) {
+                    root.getChildren().remove(block.getBlock());
+                }
+                boolean nextLevelExists = gameOverOrSetUpNextLevel();
+                if (!nextLevelExists) {
+                    endGame(true);
+                }            }
         }
     }
 
