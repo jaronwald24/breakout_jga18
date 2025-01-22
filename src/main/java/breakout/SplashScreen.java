@@ -23,11 +23,7 @@ public class SplashScreen {
 
     root.getChildren().addAll(titleText, descriptionText, instructions);
 
-    Scene introScene = new Scene(root, SIZE, SIZE, Color.BLACK);
-
-
-
-    return introScene;
+    return new Scene(root, SIZE, SIZE, Color.BLACK);
   }
 
   //creates, sets, and places text

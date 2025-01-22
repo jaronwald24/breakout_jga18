@@ -7,10 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Paddle {
   private int width;
-  private int height;
-  private double xPosition;
-  private double yPosition;
-  private Rectangle myPaddle;
+  private final Rectangle myPaddle;
   private static final int GAME_SIZE = 600;
 
   private static final int START_PADDLE_X_POS = 150;
@@ -18,9 +15,6 @@ public class Paddle {
 
   public Paddle(int width, int height, double xPosition, double yPosition) {
     this.width = width;
-    this.height = height;
-    this.xPosition = xPosition;
-    this.yPosition = yPosition;
 
     //set up the paddle Rectangle object
     this.myPaddle = new Rectangle(width, height);

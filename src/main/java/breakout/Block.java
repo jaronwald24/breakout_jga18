@@ -3,7 +3,6 @@ package breakout;
 
 import static java.util.Map.entry;
 
-import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -13,18 +12,15 @@ public class Block {
   //standard information
   public static final int width = 50;
   public static final int height = 10;
-  private double xPosition;
-  private double yPosition;
-  private Rectangle myBlock;
+  private final Rectangle myBlock;
 
   //potential add ons
-  private boolean isPowerUp;
-  private boolean isUnbreakable;
+  private final boolean isPowerUp;
+  private final boolean isUnbreakable;
   private int health;
-  private int startingHealth;
 
   //Color mapper
-  private Map<Integer, Color> colorMapper = Map.ofEntries(
+  private final Map<Integer, Color> colorMapper = Map.ofEntries(
       entry(-1, Color.GREY),
       entry(0, Color.BLACK),
       entry(1, Color.GREEN),
@@ -35,13 +31,10 @@ public class Block {
   );
 
   public Block(double xPosition, double yPosition, boolean isPowerUp, boolean isUnbreakable, int health) {
-    this.xPosition = xPosition;
-    this.yPosition = yPosition;
     this.isPowerUp = isPowerUp;
     this.isUnbreakable = isUnbreakable;
 
     this.health = health;
-    this.startingHealth = health;
 
     myBlock = new Rectangle(width, height);
     myBlock.setX(xPosition);
@@ -100,7 +93,7 @@ public class Block {
    * @return - returns the power up of class PowerUp
    */
   public PowerUp dropPowerUp(int x, int y) {
-    String[] powerUpNames = {"ballGrow"};
+    String[] powerUpNames = {"expands", "speedUp", "ballGrow"};
     String randomPowerUpName = powerUpNames[(int) (Math.random() * powerUpNames.length)];
 
     PowerUp powerUp = new PowerUp(x, y, 20, randomPowerUpName, 100);

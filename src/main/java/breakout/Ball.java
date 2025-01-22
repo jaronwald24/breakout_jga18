@@ -4,8 +4,7 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
-import javax.management.monitor.GaugeMonitorMBean;
+
 
 
 public class Ball {
@@ -13,7 +12,7 @@ public class Ball {
   private static final int PADDLE_Y_POS = 550;
 
   private int size;
-  private Circle myBall;
+  private final Circle myBall;
 
 
   private static final int SLOW_BALL_SPEED = 350;
@@ -28,7 +27,7 @@ public class Ball {
   public Ball(int size) {
     //size = diameter
     this.size = size;
-    myBall = new Circle(size/2);
+    myBall = new Circle(size/2.0);
     myBall.setFill(Color.WHITE);
 
     //the logic on lines 33-34 were adapted from the bouncer lab

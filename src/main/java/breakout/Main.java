@@ -8,11 +8,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
@@ -36,7 +34,6 @@ public class Main extends Application {
 
     private static final int FRAMES_PER_SECOND = 60;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    private static final Paint BACKGROUND = Color.AZURE;
 
     //ball constants
     private static final int BALL_SIZE = 20;
@@ -72,7 +69,7 @@ public class Main extends Application {
     private Text scoreText;
     private Text levelText;
 
-    // prev variables for powerupsp
+    // prev variables for power ups
     private double originalSpeed;
     private double prevBallSize;
 
