@@ -1,9 +1,5 @@
 # breakout
-## NAME
-
-
-DO NO FORK THIS REPOSITORY, clone it directly to your computer.
-
+## Justin Aronwald
 
 This project implements the game of Breakout with multiple levels.
 
